@@ -1,5 +1,7 @@
+import 'normalize.css/normalize.css';
+
 const Home = () => {
-  return <p>Hello world</p>;
+  return <p>Hello</p>;
 };
 
 export default Home;
