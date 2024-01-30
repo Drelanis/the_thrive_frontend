@@ -54,13 +54,13 @@ const tsRules = {
   ], // Ignore variables with "_" prefix
   '@typescript-eslint/no-unused-expressions': ['error'],
   'quote-props': 'off',
-  '@typescript-eslint/explicit-function-return-type': [
-    'error',
-    {
-      allowExpressions: true,
-      allowFunctionsWithoutTypeParameters: true,
-    },
-  ],
+  // '@typescript-eslint/explicit-function-return-type': [
+  //   'error',
+  //   {
+  //     allowExpressions: true,
+  //     allowFunctionsWithoutTypeParameters: true,
+  //   },
+  // ],
   '@typescript-eslint/no-floating-promises': 'error',
   '@typescript-eslint/unbound-method': 'off',
   '@typescript-eslint/no-use-before-define': [
