@@ -16,6 +16,8 @@ export const Input = <Type extends FieldValues>(props: InputProps<Type>) => {
   if (type === InputType.PASSWORD) {
     return (
       <InputPassword
+        value={value}
+        onChange={onChange}
         name={name}
         control={control}
         style={style}

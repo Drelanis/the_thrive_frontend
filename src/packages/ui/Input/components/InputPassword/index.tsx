@@ -9,10 +9,12 @@ import { FieldError, FieldValues } from 'react-hook-form';
 
 import { InputProps } from '../../types';
 
-import { StyledOutlinedInput } from './styles';
+import { StyledInputHelper, StyledOutlinedInput } from './styles';
 import { useLogic } from './useLogic';
 
 type Props<Type extends FieldValues> = {
+  onChange: () => void;
+  value: string;
   error?: FieldError;
 } & InputProps<Type>;
 
@@ -42,6 +44,7 @@ export const InputPassword = <Type extends FieldValues>(props: Props<Type>) => {
         }
         {...restProps}
       />
+      <StyledInputHelper>{error?.message}</StyledInputHelper>
     </FormControl>
   );
 };

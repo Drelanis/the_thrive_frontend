@@ -6,4 +6,5 @@ type Props = {
 
 export const StyledTextField = styled(TextField)(({ error }: Props) => ({
   marginBottom: error ? '0px' : '23px',
+  color: 'green',
 }));
