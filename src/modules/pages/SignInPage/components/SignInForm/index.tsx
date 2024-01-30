@@ -1,3 +1,5 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { signInStore, signInValidationSchema } from '@modules/stores';
 import { Button } from '@mui/material';
 import { Input, InputType } from '@ui';
 import { FormEvent } from 'react';
@@ -7,10 +9,9 @@ import { FormContainer } from './styles';
 
 export const SignInForm = () => {
   const { control } = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    resolver: yupResolver(signInValidationSchema),
+    defaultValues: signInStore,
+    mode: 'onChange',
   });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
