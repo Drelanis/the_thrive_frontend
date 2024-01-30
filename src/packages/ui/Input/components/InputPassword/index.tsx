@@ -4,12 +4,12 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  OutlinedInput,
 } from '@mui/material';
 import { FieldError, FieldValues } from 'react-hook-form';
 
 import { InputProps } from '../../types';
 
+import { StyledOutlinedInput } from './styles';
 import { useLogic } from './useLogic';
 
 type Props<Type extends FieldValues> = {
@@ -24,7 +24,7 @@ export const InputPassword = <Type extends FieldValues>(props: Props<Type>) => {
   return (
     <FormControl style={style} fullWidth variant="outlined">
       <InputLabel htmlFor="password">Password</InputLabel>
-      <OutlinedInput
+      <StyledOutlinedInput
         error={Boolean(error)}
         id="password"
         type={isShowPassword ? 'text' : 'password'}
