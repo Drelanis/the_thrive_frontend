@@ -23,6 +23,8 @@
       "@ui/*": ["src/packages/ui/*"],
       "@public": ["./public"],
       "@public/*": ["./public/*"],
+      "@configs": ["src/configs"],
+      "@configs/*": ["src/configs/*"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
