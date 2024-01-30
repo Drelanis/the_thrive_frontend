@@ -1,9 +1,7 @@
-import 'normalize.css/normalize.css';
+import { redirect } from 'next/navigation';
 
 const Home = () => {
-  const a = '1';
-
-  return <p>{a}</p>;
+  redirect('/signin');
 };
 
 export default Home;

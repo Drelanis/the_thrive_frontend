@@ -27,6 +27,8 @@
       "@public/*": ["./public/*"],
       "@configs": ["src/configs"],
       "@configs/*": ["src/configs/*"],
+      "@modules": ["src/modules"],
+      "@modules/*": ["src/modules/*"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

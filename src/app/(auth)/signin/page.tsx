@@ -1,5 +1,13 @@
+import { SignInPage } from '@modules';
+
+import styles from './styles.module.scss';
+
 const SignIn = () => {
-  return <div>SignIn</div>;
+  return (
+    <main className={styles.container}>
+      <SignInPage />
+    </main>
+  );
 };
 
 export default SignIn;
