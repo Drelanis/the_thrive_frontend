@@ -1,4 +1,5 @@
 import { Rubik } from '@configs';
+import { Provider } from '@lib';
 import { PropsWithChildren } from 'react';
 
 export const metadata = {
@@ -10,7 +11,9 @@ const RootLayout = (props: PropsWithChildren) => {
 
   return (
     <html lang="en" className={Rubik.className}>
-      <body>{children}</body>
+      <Provider>
+        <body>{children}</body>
+      </Provider>
     </html>
   );
 };

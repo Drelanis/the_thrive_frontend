@@ -21,6 +21,8 @@
     "paths": {
       "@ui": ["src/packages/ui"],
       "@ui/*": ["src/packages/ui/*"],
+      "@lib": ["src/packages/lib"],
+      "@lib/*": ["src/packages/lib/*"],
       "@public": ["./public"],
       "@public/*": ["./public/*"],
       "@configs": ["src/configs"],
