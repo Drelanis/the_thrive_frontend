@@ -136,20 +136,11 @@ const paddingRules = {
     {
       blankLine: 'always',
       prev: '*',
-      next: [
-        'return',
-        'if',
-        'export',
-        'function',
-        'while',
-        'try',
-        'throw',
-        'class',
-      ],
+      next: ['return', 'if', 'function', 'while', 'try', 'throw', 'class'],
     },
     {
       blankLine: 'always',
-      prev: ['if', 'function', 'while', 'export', 'throw', 'class'],
+      prev: ['if', 'function', 'while', 'throw', 'class'],
       next: '*',
     },
     { blankLine: 'any', prev: 'const', next: ['const', 'let'] },
