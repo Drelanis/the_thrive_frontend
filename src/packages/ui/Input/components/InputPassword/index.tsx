@@ -23,11 +23,15 @@ export const InputPassword = <Type extends FieldValues>(props: Props<Type>) => {
 
   const { isShowPassword, hidePassword, showPassword } = useLogic();
 
+  const isError = Boolean(error);
+
   return (
     <FormControl style={style} fullWidth variant="outlined">
-      <InputLabel htmlFor="password">Password</InputLabel>
+      <InputLabel error={isError} htmlFor="password">
+        Password *
+      </InputLabel>
       <StyledOutlinedInput
-        error={Boolean(error)}
+        error={isError}
         id="password"
         type={isShowPassword ? 'text' : 'password'}
         label="Password"

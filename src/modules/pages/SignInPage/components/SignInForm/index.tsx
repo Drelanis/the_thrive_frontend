@@ -8,7 +8,10 @@ import { useForm } from 'react-hook-form';
 import { FormContainer } from './styles';
 
 export const SignInForm = () => {
-  const { control } = useForm({
+  const {
+    control,
+    formState: { isValid },
+  } = useForm({
     resolver: yupResolver(signInValidationSchema),
     defaultValues: signInStore,
     mode: 'onChange',
@@ -29,7 +32,7 @@ export const SignInForm = () => {
         name="password"
         type={InputType.PASSWORD}
       />
-      <Button variant="contained" type="submit" fullWidth>
+      <Button disabled={!isValid} variant="contained" type="submit" fullWidth>
         SIGN IN
       </Button>
     </FormContainer>
