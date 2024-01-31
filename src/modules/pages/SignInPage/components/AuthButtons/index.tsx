@@ -1,18 +1,28 @@
 import { GitHub } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { FcGoogle } from 'react-icons/fc';
 
 import { StyledContainer } from './styles';
 
-export const AuthButtons = () => {
+type Props = {
+  isPending: boolean;
+};
+
+export const AuthButtons = (props: Props) => {
+  const { isPending } = props;
+
   return (
     <StyledContainer>
-      <Button
-        style={{ backgroundColor: 'black' }}
+      <LoadingButton
+        disabled={isPending}
         variant="contained"
-        endIcon={<GitHub />}
+        startIcon={<GitHub />}
       />
-      <Button variant="outlined" endIcon={<FcGoogle />} />
+      <LoadingButton
+        disabled={isPending}
+        variant="outlined"
+        startIcon={<FcGoogle />}
+      />
     </StyledContainer>
   );
 };

@@ -1,28 +1,20 @@
-import { signIn } from '@actions';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { signInStore, signInValidationSchema } from '@modules/stores';
-import { Button } from '@mui/material';
+import { SigninDto } from '@configs';
+import { LoadingButton } from '@mui/lab';
 import { Input, InputType } from '@ui';
 import { FormEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import { Control } from 'react-hook-form';
 
 import { FormContainer, StyledLink } from './styles';
 
-export const SignInForm = () => {
-  const {
-    control,
-    formState: { isValid },
-    getValues,
-  } = useForm({
-    resolver: yupResolver(signInValidationSchema),
-    defaultValues: signInStore,
-    mode: 'onChange',
-  });
+type Props = {
+  control: Control<SigninDto>;
+  isPending: boolean;
+  isValid: boolean;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+};
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    signIn(getValues());
-  };
+export const SignInForm = (props: Props) => {
+  const { control, isValid, onSubmit, isPending } = props;
 
   return (
     <FormContainer onSubmit={onSubmit}>
@@ -35,9 +27,15 @@ export const SignInForm = () => {
         name="password"
         type={InputType.PASSWORD}
       />
-      <Button disabled={!isValid} variant="contained" type="submit" fullWidth>
+      <LoadingButton
+        loading={isPending}
+        disabled={!isValid || isPending}
+        variant="contained"
+        type="submit"
+        fullWidth
+      >
         SIGN IN
-      </Button>
+      </LoadingButton>
       <StyledLink underline="none" href="/signup">
         Forgot Password?
       </StyledLink>
