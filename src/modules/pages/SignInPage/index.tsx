@@ -1,9 +1,9 @@
 'use client';
 
-import { AuthContainer } from '@common';
+import { AuthButtons, AuthContainer, AuthTitle } from '@common';
 import { Divider } from '@mui/material';
 
-import { AuthButtons, SignInForm, Title } from './components';
+import { SignInForm } from './components';
 import { useLogic } from './useLogic';
 
 export const SignInPage = () => {
@@ -11,7 +11,12 @@ export const SignInPage = () => {
 
   return (
     <AuthContainer>
-      <Title />
+      <AuthTitle
+        header="Welcome back"
+        subHeader="Don't have an account?"
+        link="./signup"
+        linkText="Sign up"
+      />
       <SignInForm
         control={control}
         onSubmit={onSubmit}

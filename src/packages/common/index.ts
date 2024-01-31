@@ -1,2 +1,1 @@
-export * from './AuthBackground';
-export * from './AuthContainer';
+export * from './Auth';

@@ -1,3 +1,5 @@
+'use client';
+
 import { GitHub } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { FcGoogle } from 'react-icons/fc';
