@@ -3,6 +3,7 @@ import { Provider } from '@lib';
 import { PropsWithChildren } from 'react';
 
 import 'normalize.css/normalize.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'TheThrive',
