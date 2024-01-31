@@ -1,8 +1,8 @@
 .container {
+  display: flex;
   height: 100vh;
   background-image: url('~@public/backgrounds/auth-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow: hidden;
 }

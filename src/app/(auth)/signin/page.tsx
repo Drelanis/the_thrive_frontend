@@ -1,11 +1,14 @@
 import { SignInPage } from '@modules';
+import { Box } from '@mui/material';
 
 import styles from './styles.module.scss';
 
 const SignIn = () => {
   return (
-    <main className={styles.container}>
-      <SignInPage />
+    <main>
+      <Box className={styles.container}>
+        <SignInPage />
+      </Box>
     </main>
   );
 };
