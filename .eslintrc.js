@@ -2,10 +2,7 @@ const initialRules = {
   'no-magic-numbers': 'error',
   'consistent-return': 'off',
   'eslint-comments/disable-enable-pair': 'off',
-  'eslint-comments/require-description': [
-    'warn',
-    { ignore: ['eslint-enable'] },
-  ], // we don't need to comment why we used "eslint-enable"
+  'eslint-comments/require-description': ['off', { ignore: ['eslint-enable'] }], // we don't need to comment why we used "eslint-enable"
   'quote-props': ['error', 'consistent-as-needed'],
   quotes: ['error', 'single', { avoidEscape: true }],
   'arrow-parens': ['error', 'always'],

@@ -1,31 +1,44 @@
 import { AuthFormContainer } from '@common';
-import { SigninDto } from '@configs';
+import { SignUpDto } from '@configs';
 import { LoadingButton } from '@mui/lab';
 import { Input, InputType } from '@ui';
 import { FormEvent } from 'react';
 import { Control } from 'react-hook-form';
 
-import { StyledLink } from './styles';
-
 type Props = {
-  control: Control<SigninDto>;
+  control: Control<SignUpDto>;
   isPending: boolean;
   isValid: boolean;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
-export const SignInForm = (props: Props) => {
-  const { control, isValid, onSubmit, isPending } = props;
+export const SignUpForm = (props: Props) => {
+  const { control, isPending, isValid, onSubmit } = props;
 
   return (
     <AuthFormContainer onSubmit={onSubmit}>
-      <Input required fullWidth control={control} name="email" label="Email" />
+      <Input
+        required
+        fullWidth
+        control={control}
+        label="Company name"
+        name="name"
+      />
+      <Input required fullWidth control={control} label="Email" name="email" />
       <Input
         required
         fullWidth
         control={control}
         label="Password"
         name="password"
+        type={InputType.PASSWORD}
+      />
+      <Input
+        required
+        fullWidth
+        control={control}
+        label="Repeat password"
+        name="repeatPassword"
         type={InputType.PASSWORD}
       />
       <LoadingButton
@@ -35,11 +48,8 @@ export const SignInForm = (props: Props) => {
         type="submit"
         fullWidth
       >
-        SIGN IN
+        SIGN UP
       </LoadingButton>
-      <StyledLink underline="none" href="/signup">
-        Forgot Password?
-      </StyledLink>
     </AuthFormContainer>
   );
 };
