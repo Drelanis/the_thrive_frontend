@@ -1,18 +1,17 @@
 import { Box, Typography } from '@mui/material';
-import Link from 'next/link';
 
-import styles from './styles.module.scss';
+import { StyledHeader, StyledLink, StyledSubHeaderContainer } from './styles';
 
 export const Title = () => {
   return (
-    <Box className={styles.titleContainer}>
-      <Typography className={styles.header}>Welcome back</Typography>
-      <Box className={styles.subHeaderContainer}>
+    <Box>
+      <StyledHeader>Welcome back</StyledHeader>
+      <StyledSubHeaderContainer>
         <Typography>Don't have an account?</Typography>
-        <Link className={styles.link} passHref href="/signup">
+        <StyledLink underline="hover" href="/signup">
           Sign up
-        </Link>
-      </Box>
+        </StyledLink>
+      </StyledSubHeaderContainer>
     </Box>
   );
 };

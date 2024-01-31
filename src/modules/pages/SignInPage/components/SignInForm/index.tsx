@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import { Input, InputType } from '@ui';
 import { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
@@ -35,6 +35,9 @@ export const SignInForm = () => {
       <Button disabled={!isValid} variant="contained" type="submit" fullWidth>
         SIGN IN
       </Button>
+      <Link underline="none" href="/signup">
+        Forgot Password
+      </Link>
     </FormContainer>
   );
 };
