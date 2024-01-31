@@ -1,11 +1,11 @@
 import { SignInPage } from '@modules';
-import { AuthContainer } from 'src/packages/common';
+import { AuthBackground } from 'src/packages/common';
 
 const SignIn = () => {
   return (
-    <AuthContainer>
+    <AuthBackground>
       <SignInPage />
-    </AuthContainer>
+    </AuthBackground>
   );
 };
 

@@ -1,16 +1,16 @@
 'use client';
 
+import { AuthContainer } from '@common';
 import { Divider } from '@mui/material';
 
 import { AuthButtons, SignInForm, Title } from './components';
-import { StyledBox } from './styles';
 import { useLogic } from './useLogic';
 
 export const SignInPage = () => {
   const { onSubmit, control, isPending, isValid } = useLogic();
 
   return (
-    <StyledBox>
+    <AuthContainer>
       <Title />
       <SignInForm
         control={control}
@@ -20,6 +20,6 @@ export const SignInPage = () => {
       />
       <Divider>OR</Divider>
       <AuthButtons isPending={isPending} />
-    </StyledBox>
+    </AuthContainer>
   );
 };

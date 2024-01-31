@@ -21,6 +21,8 @@
     "paths": {
       "@ui": ["src/packages/ui"],
       "@ui/*": ["src/packages/ui/*"],
+      "@common": ["src/packages/common"],
+      "@common/*": ["src/packages/common/*"],
       "@lib": ["src/packages/lib"],
       "@lib/*": ["src/packages/lib/*"],
       "@public": ["./public"],
@@ -31,8 +33,6 @@
       "@modules/*": ["src/modules/*"],
       "@actions": ["src/actions"],
       "@actions/*": ["src/actions/*"],
-      "@common": ["src/common"],
-      "@common/*": ["src/common/*"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
