@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
-import { Button, Link } from '@mui/material';
+import { Button } from '@mui/material';
 import { Input, InputType } from '@ui';
 import { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { FormContainer } from './styles';
+import { FormContainer, StyledLink } from './styles';
 
 export const SignInForm = () => {
   const {
@@ -35,9 +35,9 @@ export const SignInForm = () => {
       <Button disabled={!isValid} variant="contained" type="submit" fullWidth>
         SIGN IN
       </Button>
-      <Link underline="none" href="/signup">
-        Forgot Password
-      </Link>
+      <StyledLink underline="none" href="/signup">
+        Forgot Password?
+      </StyledLink>
     </FormContainer>
   );
 };

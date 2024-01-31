@@ -1,6 +1,8 @@
 'use client';
 
-import { SignInForm, Title } from './components';
+import { Divider } from '@mui/material';
+
+import { AuthButtons, SignInForm, Title } from './components';
 import { StyledBox } from './styles';
 
 export const SignInPage = () => {
@@ -8,6 +10,8 @@ export const SignInPage = () => {
     <StyledBox>
       <Title />
       <SignInForm />
+      <Divider>OR</Divider>
+      <AuthButtons />
     </StyledBox>
   );
 };
