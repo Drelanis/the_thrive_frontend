@@ -1,9 +1,6 @@
-export type SignInStoreType = {
-  email: string;
-  password: string;
-};
+import { SigninDto } from '@configs';
 
-export const signInStore: SignInStoreType = {
+export const signInStore: SigninDto = {
   email: '',
   password: '',
 };

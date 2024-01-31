@@ -1,3 +1,4 @@
+import { signIn } from '@actions';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
 import { Button } from '@mui/material';
@@ -11,6 +12,7 @@ export const SignInForm = () => {
   const {
     control,
     formState: { isValid },
+    getValues,
   } = useForm({
     resolver: yupResolver(signInValidationSchema),
     defaultValues: signInStore,
@@ -19,6 +21,7 @@ export const SignInForm = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    signIn(getValues());
   };
 
   return (
