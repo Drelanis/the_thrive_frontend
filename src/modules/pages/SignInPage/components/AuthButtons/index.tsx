@@ -1,5 +1,6 @@
-import { GitHub, Google } from '@mui/icons-material';
+import { GitHub } from '@mui/icons-material';
 import { Button } from '@mui/material';
+import { FcGoogle } from 'react-icons/fc';
 
 import { StyledContainer } from './styles';
 
@@ -10,12 +11,8 @@ export const AuthButtons = () => {
         style={{ backgroundColor: 'black' }}
         variant="contained"
         endIcon={<GitHub />}
-      >
-        With GitHub
-      </Button>
-      <Button variant="outlined" endIcon={<Google />}>
-        With Google
-      </Button>
+      />
+      <Button variant="outlined" endIcon={<FcGoogle />} />
     </StyledContainer>
   );
 };
