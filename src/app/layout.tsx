@@ -6,7 +6,7 @@ import 'normalize.css/normalize.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
-  title: 'TheThrive',
+  title: 'The Thrive',
 };
 
 const RootLayout = (props: PropsWithChildren) => {

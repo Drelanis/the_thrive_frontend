@@ -1,3 +1,5 @@
+'use client';
+
 import { Divider } from '@mui/material';
 
 import { AuthButtons, SignInForm, Title } from './components';
