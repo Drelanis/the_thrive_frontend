@@ -3,8 +3,7 @@
 import { SignUpDto } from '@configs';
 import { db } from '@lib/db';
 import { signUpValidationSchema } from '@modules/stores';
-import { CompanyType } from '@server/types';
-import { getErrorResponse } from '@server/utils';
+import { getCompanyByEmail, getErrorResponse } from '@server/utils';
 import * as bcrypt from 'bcryptjs';
 
 export const signUp = async (values: SignUpDto) => {
@@ -17,13 +16,9 @@ export const signUp = async (values: SignUpDto) => {
       Number(process.env.BCRYPT_SALT) || 0,
     );
 
-    const existingUser = (await db.company.findUnique({
-      where: {
-        email,
-      },
-    })) as CompanyType | null;
+    const existingCompany = await getCompanyByEmail(email);
 
-    if (existingUser) {
+    if (existingCompany) {
       throw new Error(
         'A company with this email address has already been created',
       );
