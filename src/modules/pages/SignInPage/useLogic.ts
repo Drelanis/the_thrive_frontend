@@ -25,6 +25,8 @@ export const useLogic = () => {
 
       if (data?.isError) {
         toast.error(data?.message);
+
+        return;
       }
 
       toast.success(data?.message);

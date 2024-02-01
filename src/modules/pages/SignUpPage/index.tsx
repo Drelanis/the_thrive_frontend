@@ -22,7 +22,7 @@ export const SignUpPage = () => {
         control={control}
         onSubmit={onSubmit}
         isValid={isValid}
-        isPending={false}
+        isPending={isPending}
       />
       <Divider>OR</Divider>
       <AuthButtons isPending={isPending} />
