@@ -1,6 +1,6 @@
-import { signIn } from '@actions';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
+import { signIn } from '@server/actions';
 import { FormEvent, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';

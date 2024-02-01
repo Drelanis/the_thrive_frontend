@@ -1,6 +1,6 @@
-import { signUp } from '@actions';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpStore, signUpValidationSchema } from '@modules/stores';
+import { signUp } from '@server/actions';
 import { FormEvent, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
