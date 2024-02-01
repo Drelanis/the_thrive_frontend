@@ -2,6 +2,7 @@
 
 import { SignUpDto } from '@configs';
 import { signUpValidationSchema } from '@modules/stores';
+import { getErrorResponse } from '@server/utils';
 
 export const signUp = async (values: SignUpDto) => {
   try {
@@ -9,10 +10,6 @@ export const signUp = async (values: SignUpDto) => {
 
     return { isError: false, message: 'Account created =)' };
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      const errorMessage = error.message;
-
-      return { isError: true, message: errorMessage };
-    }
+    return getErrorResponse(error);
   }
 };
