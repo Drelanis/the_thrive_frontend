@@ -1,14 +1,45 @@
 'use server';
 
 import { SignUpDto } from '@configs';
+import { db } from '@lib/db';
 import { signUpValidationSchema } from '@modules/stores';
+import { CompanyType } from '@server/types';
 import { getErrorResponse } from '@server/utils';
+import * as bcrypt from 'bcryptjs';
 
 export const signUp = async (values: SignUpDto) => {
   try {
-    await signUpValidationSchema.validate(values);
+    const { name, email, password } =
+      await signUpValidationSchema.validate(values);
 
-    return { isError: false, message: 'Account created =)' };
+    const hashedPassword = await bcrypt.hash(
+      password,
+      Number(process.env.BCRYPT_SALT) || 0,
+    );
+
+    const existingUser = (await db.company.findUnique({
+      where: {
+        email,
+      },
+    })) as CompanyType | null;
+
+    if (existingUser) {
+      throw new Error(
+        'A company with this email address has already been created',
+      );
+    }
+
+    await db.company.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    // TODO: Send verification email
+
+    return { isError: false, message: 'Account created!' };
   } catch (error: unknown) {
     return getErrorResponse(error);
   }

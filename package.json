@@ -22,7 +22,8 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
     "@mui/system": "^5.15.6",
     "@prisma/client": "^5.9.0",
-    "bcrypt": "^5.1.1",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "next": "14.1.0",
@@ -38,7 +39,6 @@
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^7.3.6",
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
