@@ -2,12 +2,13 @@
 
 import { AuthButtons, AuthContainer, AuthTitle } from '@common';
 import { Divider } from '@mui/material';
+import { Toast } from '@ui';
 
 import { SignUpForm } from './components';
 import { useLogic } from './useLogic';
 
 export const SignUpPage = () => {
-  const { control, onSubmit, isValid } = useLogic();
+  const { control, onSubmit, isValid, isPending } = useLogic();
 
   return (
     <AuthContainer>
@@ -24,7 +25,8 @@ export const SignUpPage = () => {
         isPending={false}
       />
       <Divider>OR</Divider>
-      <AuthButtons isPending={false} />
+      <AuthButtons isPending={isPending} />
+      <Toast />
     </AuthContainer>
   );
 };

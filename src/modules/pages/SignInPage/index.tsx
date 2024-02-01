@@ -2,6 +2,7 @@
 
 import { AuthButtons, AuthContainer, AuthTitle } from '@common';
 import { Divider } from '@mui/material';
+import { Toast } from '@ui';
 
 import { SignInForm } from './components';
 import { useLogic } from './useLogic';
@@ -25,6 +26,7 @@ export const SignInPage = () => {
       />
       <Divider>OR</Divider>
       <AuthButtons isPending={isPending} />
+      <Toast />
     </AuthContainer>
   );
 };
