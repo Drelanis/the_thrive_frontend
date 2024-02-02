@@ -1,3 +1,5 @@
+import { Routes } from '@configs/constants';
+import { db } from '@lib/db';
 import { signInValidationSchema } from '@modules/stores';
 import { getUserByEmail } from '@server/utils';
 import bcrypt from 'bcryptjs';
@@ -6,6 +8,17 @@ import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
 
 export default {
+  pages: {
+    signIn: Routes.SIGN_IN,
+  },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
+  },
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,

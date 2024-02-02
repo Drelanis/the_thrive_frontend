@@ -19,9 +19,10 @@ export const signUp = async (values: SignUpDto) => {
     const existingCompany = await getUserByEmail(email);
 
     if (existingCompany) {
-      throw new Error(
-        'A company with this email address has already been created',
-      );
+      return {
+        isError: true,
+        message: 'A company with this email address has already been created',
+      };
     }
 
     await db.user.create({
