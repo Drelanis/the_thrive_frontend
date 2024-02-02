@@ -11,6 +11,12 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum EmployeeRole {
+  ADMIN
+  EDITOR
+  APPROVER
+}
+
 
 model Company {
   id            String    @id @default(cuid())
@@ -18,6 +24,7 @@ model Company {
   email         String?   @unique
   emailVerified DateTime?
   password      String?
+  role          EmployeeRole @default(EDITOR)
   accounts      Account[]
 }
 
