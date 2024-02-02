@@ -44,6 +44,7 @@ const initialRules = {
 };
 
 const tsRules = {
+  'no-param-reassign': ['error', { props: false }],
   '@typescript-eslint/no-shadow': 'error', // Vars with the same name in different scopes are not allowed
   '@typescript-eslint/no-unused-vars': [
     'error',
