@@ -1,6 +1,5 @@
 'use client';
 
-import { GitHub } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -15,11 +14,6 @@ export const AuthButtons = (props: Props) => {
 
   return (
     <StyledContainer>
-      <LoadingButton
-        disabled={isPending}
-        variant="contained"
-        startIcon={<GitHub />}
-      />
       <LoadingButton
         disabled={isPending}
         variant="outlined"

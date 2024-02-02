@@ -19,7 +19,7 @@ type Props<Type extends FieldValues> = {
 } & InputProps<Type>;
 
 export const InputPassword = <Type extends FieldValues>(props: Props<Type>) => {
-  const { error, style, ...restProps } = props;
+  const { error, style, name, label, ...restProps } = props;
 
   const { isShowPassword, hidePassword, showPassword } = useLogic();
 
@@ -28,13 +28,13 @@ export const InputPassword = <Type extends FieldValues>(props: Props<Type>) => {
   return (
     <FormControl style={style} fullWidth variant="outlined">
       <InputLabel error={isError} htmlFor="password">
-        Password *
+        {`${label} *`}
       </InputLabel>
       <StyledOutlinedInput
         error={isError}
-        id="password"
+        id={name}
+        label={label}
         type={isShowPassword ? 'text' : 'password'}
-        label="Password"
         endAdornment={
           <InputAdornment position="end">
             <IconButton
