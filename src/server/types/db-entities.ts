@@ -4,7 +4,7 @@ export enum EmployeeRoles {
   APPROVER = 'APPROVER',
 }
 
-export type CompanyType = {
+export type UserType = {
   accounts: AccountType[];
   email: string;
   emailVerified: Date;

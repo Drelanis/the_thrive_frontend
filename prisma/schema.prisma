@@ -17,19 +17,20 @@ enum EmployeeRole {
   APPROVER
 }
 
-model Company {
+model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   password      String?
-  role          EmployeeRole @default(EDITOR)
+  image         String?
   accounts      Account[]
+  role          EmployeeRole @default(EDITOR)
 }
 
 model Account {
   id                 String  @id @default(cuid())
-  companyId          String
+  userId             String
   type               String
   provider           String
   providerAccountId  String
@@ -40,9 +41,8 @@ model Account {
   scope              String?
   id_token           String?  @db.Text
   session_state      String?
-  refresh_token_expires_in Int?
 
-  user Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }

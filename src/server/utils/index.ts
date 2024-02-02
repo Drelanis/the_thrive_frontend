@@ -1,2 +1,2 @@
 export * from './getErrorResponse';
-export * from './companyUtils';
+export * from './userUtils';

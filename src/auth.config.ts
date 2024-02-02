@@ -1,5 +1,5 @@
 import { signInValidationSchema } from '@modules/stores';
-import { getCompanyByEmail } from '@server/utils';
+import { getUserByEmail } from '@server/utils';
 import bcrypt from 'bcryptjs';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
@@ -26,7 +26,7 @@ export default {
           password,
         });
 
-        const company = await getCompanyByEmail(email as string);
+        const company = await getUserByEmail(email as string);
 
         if (!company || !company?.password) {
           return null;

@@ -3,7 +3,7 @@
 import { SignUpDto } from '@configs';
 import { db } from '@lib/db';
 import { signUpValidationSchema } from '@modules/stores';
-import { getCompanyByEmail, getErrorResponse } from '@server/utils';
+import { getErrorResponse, getUserByEmail } from '@server/utils';
 import * as bcrypt from 'bcryptjs';
 
 export const signUp = async (values: SignUpDto) => {
@@ -16,7 +16,7 @@ export const signUp = async (values: SignUpDto) => {
       Number(process.env.BCRYPT_SALT) || 0,
     );
 
-    const existingCompany = await getCompanyByEmail(email);
+    const existingCompany = await getUserByEmail(email);
 
     if (existingCompany) {
       throw new Error(
@@ -24,7 +24,7 @@ export const signUp = async (values: SignUpDto) => {
       );
     }
 
-    await db.company.create({
+    await db.user.create({
       data: {
         name,
         email,

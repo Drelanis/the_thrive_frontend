@@ -1,6 +1,7 @@
 'use client';
 
 import { LoadingButton } from '@mui/lab';
+import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 
 import { StyledContainer } from './styles';
@@ -15,6 +16,7 @@ export const AuthButtons = (props: Props) => {
   return (
     <StyledContainer>
       <LoadingButton
+        onClick={() => signIn('google')}
         disabled={isPending}
         variant="outlined"
         startIcon={<FcGoogle />}
