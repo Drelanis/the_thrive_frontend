@@ -1,3 +1,9 @@
+export enum EmployeeRoles {
+  ADMIN = 'ADMIN',
+  EDITOR = 'EDITOR',
+  APPROVER = 'APPROVER',
+}
+
 export type CompanyType = {
   accounts: AccountType[];
   email: string;
@@ -5,6 +11,7 @@ export type CompanyType = {
   id: string;
   name: string;
   password: string;
+  role: EmployeeRoles;
 };
 
 export type AccountType = {
