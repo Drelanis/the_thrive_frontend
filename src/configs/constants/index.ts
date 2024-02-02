@@ -1,1 +1,2 @@
-export const MAX_PASSWORD_VALUE = 6;
+export * from './common';
+export * from './routes';

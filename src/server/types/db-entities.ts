@@ -1,4 +1,13 @@
 export type CompanyType = {
+  accounts: AccountType[];
+  email: string;
+  emailVerified: Date;
+  id: string;
+  name: string;
+  password: string;
+};
+
+export type AccountType = {
   access_token: string;
   companyId: string;
   expires_at: Date;

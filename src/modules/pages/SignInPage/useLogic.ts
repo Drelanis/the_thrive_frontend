@@ -1,12 +1,15 @@
+import { Routes } from '@configs/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
 import { signIn } from '@server/actions';
+import { useRouter } from 'next/navigation';
 import { FormEvent, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 export const useLogic = () => {
   const [isPending, setTransition] = useTransition();
+  const router = useRouter();
 
   const {
     control,
@@ -29,7 +32,7 @@ export const useLogic = () => {
         return;
       }
 
-      toast.success(data?.message);
+      router.push(Routes.SETTINGS);
     });
   };
 
