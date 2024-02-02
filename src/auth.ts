@@ -17,14 +17,6 @@ export const {
   session: {
     strategy: 'jwt',
   },
-  events: {
-    async linkAccount({ user }) {
-      await db.user.update({
-        where: { id: user.id },
-        data: { emailVerified: new Date() },
-      });
-    },
-  },
   callbacks: {
     // async signIn({ user }) {
     //   const existingUser = await getUserById(user.id);
