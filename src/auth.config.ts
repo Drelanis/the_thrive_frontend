@@ -1,7 +1,7 @@
 import { Routes } from '@configs/constants';
 import { db } from '@lib/db';
 import { signInValidationSchema } from '@modules/stores';
-import { getUserByEmail } from '@server/utils';
+import { getUserByEmail } from '@server/actions/user';
 import bcrypt from 'bcryptjs';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';

@@ -1,8 +1,8 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { DefaultJWT } from '@configs';
 import { db } from '@lib/db';
+import { getUserById } from '@server/actions/user';
 import { EmployeeRoles } from '@server/types';
-import { getUserById } from '@server/utils';
 import NextAuth, { Session } from 'next-auth';
 
 import authConfig from './auth.config';
@@ -18,15 +18,17 @@ export const {
     strategy: 'jwt',
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existingUser = await getUserById(user.id);
+    async signIn({ user, account }) {
+      if (account?.provider !== 'credentials') {
+        return true;
+      }
 
-    //   if (!existingUser || !existingUser.emailVerified) {
-    //     return false;
-    //   }
+      const existingUser = await getUserById(user.id);
 
-    //   return true;
-    // },
+      const isEmailVerified = Boolean(existingUser?.emailVerified);
+
+      return isEmailVerified;
+    },
     session({ session, token }: { session: Session; token?: DefaultJWT }) {
       const { user } = session;
 
