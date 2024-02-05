@@ -3,8 +3,11 @@
 import { SignUpDto } from '@configs';
 import { db } from '@lib/db';
 import { signUpValidationSchema } from '@modules/stores';
-import { getErrorResponse, getUserByEmail } from '@server/utils';
+import { getUserByEmail } from '@server/actions/user';
+import { getErrorResponse } from '@server/utils';
 import * as bcrypt from 'bcryptjs';
+
+import { generateVerificationToken } from '../verificationToken';
 
 export const signUp = async (values: SignUpDto) => {
   try {
@@ -33,9 +36,10 @@ export const signUp = async (values: SignUpDto) => {
       },
     });
 
+    await generateVerificationToken(email);
     // TODO: Send verification email
 
-    return { isError: false, message: 'Account created!' };
+    return { isError: false, message: 'Confirmation email sent!' };
   } catch (error: unknown) {
     return getErrorResponse(error);
   }

@@ -1,4 +1,2 @@
-export * from './signIn';
-export * from './signUp';
-export * from './signOut';
-export * from './verificationToken';
+export * from './auth';
+export * from './user';
