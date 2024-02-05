@@ -1,6 +1,7 @@
 'use server';
 
 import { SigninDto } from '@configs';
+import { sendVerificationEmail } from '@lib/mail';
 import { signInValidationSchema } from '@modules/stores';
 import { signIn as NASignIn } from '@root/src/auth';
 import { DEFAULT_SIGNIN_REDIRECT } from '@root/src/routes';
@@ -16,7 +17,9 @@ export const signIn = async (values: SigninDto) => {
     const existingUser = await getUserByEmail(values.email);
 
     if (!existingUser?.emailVerified) {
-      await generateVerificationToken(values.email);
+      const verificationToken = await generateVerificationToken(values.email);
+
+      await sendVerificationEmail(values.email, verificationToken?.token || '');
 
       return {
         isError: true,

@@ -2,6 +2,7 @@
 
 import { SignUpDto } from '@configs';
 import { db } from '@lib/db';
+import { sendVerificationEmail } from '@lib/mail';
 import { signUpValidationSchema } from '@modules/stores';
 import { getUserByEmail } from '@server/actions/user';
 import { getErrorResponse } from '@server/utils';
@@ -36,8 +37,9 @@ export const signUp = async (values: SignUpDto) => {
       },
     });
 
-    await generateVerificationToken(email);
-    // TODO: Send verification email
+    const verificationToken = await generateVerificationToken(email);
+
+    await sendVerificationEmail(email, verificationToken?.token || '');
 
     return { isError: false, message: 'Confirmation email sent!' };
   } catch (error: unknown) {
