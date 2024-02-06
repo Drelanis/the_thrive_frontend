@@ -1,4 +1,4 @@
-import { auth, signOut } from '@/src/auth';
+import { auth, signOut } from '@root/src/auth';
 
 const Settings = async () => {
   const session = await auth();

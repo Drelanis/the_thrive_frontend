@@ -19,7 +19,7 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider !== 'credentials') {
+      if (account?.type !== 'credentials') {
         return true;
       }
 

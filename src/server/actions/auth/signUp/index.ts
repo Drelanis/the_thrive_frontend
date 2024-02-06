@@ -1,8 +1,8 @@
 'use server';
 
 import { SignUpDto } from '@configs';
+import { sendVerificationEmail } from '@lib';
 import { db } from '@lib/db';
-import { sendVerificationEmail } from '@lib/mail';
 import { signUpValidationSchema } from '@modules/stores';
 import { getUserByEmail } from '@server/actions/user';
 import { getErrorResponse } from '@server/utils';

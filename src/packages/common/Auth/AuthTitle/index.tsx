@@ -6,9 +6,9 @@ import { StyledHeader, StyledLink, StyledSubHeaderContainer } from './styles';
 
 type Props = {
   header: string;
-  link: string;
-  linkText: string;
   subHeader: string;
+  link?: string;
+  linkText?: string;
 };
 
 export const AuthTitle = (props: Props) => {
@@ -18,9 +18,9 @@ export const AuthTitle = (props: Props) => {
     <Box>
       <StyledHeader>{header}</StyledHeader>
       <StyledSubHeaderContainer>
-        <Typography>{subHeader}</Typography>
+        <Typography>{subHeader || ''}</Typography>
         <StyledLink underline="hover" href={link}>
-          {linkText}
+          {linkText || ''}
         </StyledLink>
       </StyledSubHeaderContainer>
     </Box>
