@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  padding: 50px;
+  height: 30rem;
+  width: 30rem;
+  border-radius: 3rem;
+  margin: auto;
+  overflow-y: scroll;
+}

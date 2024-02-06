@@ -1,5 +1,4 @@
 export enum Routes {
-  SETTINGS = '/settings',
-  SIGN_IN = '/signin',
-  SIGN_UP = '/signup',
+  SING_IN = '/auth/signIn',
+  SING_UP = '/auth/signUp',
 }
