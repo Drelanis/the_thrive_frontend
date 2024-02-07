@@ -5,3 +5,4 @@ babel.config.js
 next.config.js
 .next
 .husky
+/prisma

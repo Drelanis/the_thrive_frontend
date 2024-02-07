@@ -8,9 +8,8 @@ datasource db {
 }
 
 enum UserRole {
-  ADMIN
-  EDITOR
-  APPROVER
+  USER
+  COMPANY
 }
 
 model User {
@@ -21,7 +20,7 @@ model User {
   password      String?
   image         String?
   accounts      Account[]
-  role          UserRole @default(EDITOR)
+  role          UserRole @default(USER)
 }
 
 model Account {
