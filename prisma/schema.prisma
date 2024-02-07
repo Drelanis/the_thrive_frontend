@@ -7,7 +7,7 @@ datasource db {
   url  	    = env("DATABASE_URL")
 }
 
-enum EmployeeRole {
+enum UserRole {
   ADMIN
   EDITOR
   APPROVER
@@ -21,7 +21,7 @@ model User {
   password      String?
   image         String?
   accounts      Account[]
-  role          EmployeeRole @default(EDITOR)
+  role          UserRole @default(EDITOR)
 }
 
 model Account {
