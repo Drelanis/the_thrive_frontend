@@ -1,13 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSignUp } from '@modules/hooks';
 import { signUpStore, signUpValidationSchema } from '@modules/stores';
-import { signUp } from '@server';
-import { FormEvent, useTransition } from 'react';
+import { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 export const useLogic = () => {
-  const [isPending, setTransition] = useTransition();
-
   const {
     control,
     formState: { isValid },
@@ -18,20 +15,12 @@ export const useLogic = () => {
     mode: 'onChange',
   });
 
+  const { isPending, onSignUp } = useSignUp({ values: getValues() });
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setTransition(async () => {
-      const data = await signUp(getValues());
-
-      if (data.isError) {
-        toast.error(data.message);
-
-        return;
-      }
-
-      toast.success(data.message);
-    });
+    onSignUp();
   };
 
   return {
