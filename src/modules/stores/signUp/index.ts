@@ -1,7 +1,8 @@
 import { SignUpDto } from '@configs';
 
 export const signUpStore: SignUpDto = {
-  name: '',
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
   repeatPassword: '',

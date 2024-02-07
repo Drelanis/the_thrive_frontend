@@ -5,7 +5,8 @@ export type SigninDto = {
 
 export type SignUpDto = {
   email: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   password: string;
   repeatPassword: string;
 };

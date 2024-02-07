@@ -5,7 +5,8 @@ import { MAX_PASSWORD_VALUE } from '@configs/constants';
 import * as yup from 'yup';
 
 export const signUpValidationSchema = yup.object({
-  name: yup.string().required(ValidationHints.REQUIRED),
+  firstName: yup.string().required(ValidationHints.REQUIRED),
+  lastName: yup.string().required(ValidationHints.REQUIRED),
   email: yup
     .string()
     .required(ValidationHints.REQUIRED)
