@@ -5,3 +5,8 @@ export enum PROVIDERS {
   GOOGLE = 'google',
   GITHUB = 'github',
 }
+
+export enum UserRoles {
+  USER = 'USER',
+  COMPANY = 'COMPANY',
+}
