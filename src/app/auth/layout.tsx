@@ -1,4 +1,4 @@
-import { AuthContainer } from '@ui';
+import { AuthContainer } from '@common';
 import { PropsWithChildren } from 'react';
 
 const AuthLayout = (props: PropsWithChildren) => {

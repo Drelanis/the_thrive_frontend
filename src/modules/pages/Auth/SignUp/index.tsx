@@ -1,5 +1,5 @@
+import { AuthTitle } from '@common';
 import { Routes } from '@configs';
-import { AuthTitle } from '@ui';
 
 export const SignUp = () => {
   return (
