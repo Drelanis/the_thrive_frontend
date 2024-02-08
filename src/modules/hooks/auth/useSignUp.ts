@@ -1,5 +1,5 @@
 import { SignUpDto } from '@configs';
-import { signUp } from '@server/modules';
+import { signUp } from '@server/actions';
 import { useCallback, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
