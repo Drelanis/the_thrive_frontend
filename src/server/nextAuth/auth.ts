@@ -3,6 +3,7 @@ import { db } from '@lib';
 import NextAuth from 'next-auth';
 
 import authConfig from './auth.config';
+import { callbacks } from './callbacks';
 
 export const {
   handlers: { GET, POST },
@@ -14,5 +15,6 @@ export const {
   session: {
     strategy: 'jwt',
   },
+  callbacks,
   ...authConfig,
 });
