@@ -33,6 +33,8 @@
       "@modules/*": ["src/modules/*"],
       "@server": ["src/server"],
       "@server/*": ["src/server/*"],
+      "@middleware": ["src/server/middleware"],
+      "@middleware/*": ["src/server/middleware*"],
       "@root": ["./"],
       "@root/*": ["./*"],
     },
