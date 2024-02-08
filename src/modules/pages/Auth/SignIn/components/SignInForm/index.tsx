@@ -2,7 +2,6 @@ import { AuthFormContainer } from '@common';
 import { Routes, SigninDto } from '@configs';
 import { LoadingButton } from '@mui/lab';
 import { Input, InputType } from '@ui';
-import { FormEvent } from 'react';
 import { Control } from 'react-hook-form';
 
 import { StyledLink } from './styles';
@@ -11,14 +10,14 @@ type Props = {
   control: Control<SigninDto>;
   isPending: boolean;
   isValid: boolean;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSubmit: () => void;
 };
 
 export const SignInForm = (props: Props) => {
   const { control, isValid, onSubmit, isPending } = props;
 
   return (
-    <AuthFormContainer onSubmit={onSubmit}>
+    <AuthFormContainer>
       <Input required fullWidth control={control} name="email" label="Email" />
       <Input
         required
@@ -29,6 +28,7 @@ export const SignInForm = (props: Props) => {
         type={InputType.PASSWORD}
       />
       <LoadingButton
+        onClick={onSubmit}
         loading={isPending}
         disabled={!isValid || isPending}
         variant="contained"

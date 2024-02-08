@@ -1,7 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSignUp } from '@modules/hooks';
 import { signUpStore, signUpValidationSchema } from '@modules/stores';
-import { FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 
 export const useLogic = () => {
@@ -17,17 +16,11 @@ export const useLogic = () => {
 
   const { isPending, onSignUp } = useSignUp({ values: getValues() });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    onSignUp();
-  };
-
   return {
     control,
     isValid,
     getValues,
-    onSubmit,
+    onSignUp,
     isPending,
   };
 };

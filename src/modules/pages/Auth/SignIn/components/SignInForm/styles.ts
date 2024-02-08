@@ -1,14 +1,6 @@
 import { Link } from '@mui/material';
-import { styled as MUIStyled } from '@mui/system';
-import styled from 'styled-components';
+import { styled } from '@mui/system';
 
-export const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 100px;
-`;
-
-export const StyledLink = MUIStyled(Link)`
+export const StyledLink = styled(Link)`
   margin-left: auto;
 `;

@@ -9,7 +9,7 @@ import { StyledDivider } from './styles';
 import { useLogic } from './useLogic';
 
 export const SignUp = () => {
-  const { control, onSubmit, isValid, isPending } = useLogic();
+  const { control, onSignUp, isValid, isPending } = useLogic();
 
   return (
     <>
@@ -21,7 +21,7 @@ export const SignUp = () => {
       />
       <SignUpForm
         control={control}
-        onSubmit={onSubmit}
+        onSubmit={onSignUp}
         isValid={isValid}
         isPending={isPending}
       />

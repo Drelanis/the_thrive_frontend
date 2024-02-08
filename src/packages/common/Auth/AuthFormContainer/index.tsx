@@ -1,15 +1,11 @@
 'use client';
 
-import { FormEvent, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
-import { FormContainer } from './styles';
+import { StyledFormControl } from './styles';
 
-type Props = {
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-} & PropsWithChildren;
+export const AuthFormContainer = (props: PropsWithChildren) => {
+  const { children } = props;
 
-export const AuthFormContainer = (props: Props) => {
-  const { children, onSubmit } = props;
-
-  return <FormContainer onSubmit={onSubmit}>{children}</FormContainer>;
+  return <StyledFormControl>{children}</StyledFormControl>;
 };

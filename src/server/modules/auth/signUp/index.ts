@@ -2,7 +2,7 @@
 
 import { SignUpDto } from '@configs';
 import { signUpValidationSchema } from '@modules/stores';
-import { createUser } from '@server/actions/user';
+import { createUser } from '@server/modules/user';
 import { ErrorResponse, SuccessResponse } from '@server/utils';
 
 export const signUp = async (values: SignUpDto) => {

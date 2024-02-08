@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
 // import { signIn } from '@server/actions';
 // import { useRouter } from 'next/navigation';
-import { FormEvent, useTransition } from 'react';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 // import { toast } from 'react-toastify';
 
@@ -20,17 +20,13 @@ export const useLogic = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
     // setTransition(async () => {
     //   const data = await signIn(getValues());
-
     //   if (data?.isError) {
     //     toast.error(data?.message);
-
     //     return;
     //   }
-
     //   router.push(Routes.SETTINGS);
     // });
   };
