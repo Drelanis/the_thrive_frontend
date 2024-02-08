@@ -1,13 +1,13 @@
-import { UserRoles } from '@configs';
+import { PROVIDERS, UserRoles } from '@configs';
 import { getUserById } from '@server/actions/user';
 
 import { CallbacksType } from './types';
 
 export const callbacks: CallbacksType = {
-  async signIn({ user, account }) {
+  signIn({ user, account }) {
     const { id } = user;
 
-    if (account?.type !== 'credentials') {
+    if (account?.type !== PROVIDERS.CREDENTIALS) {
       return true;
     }
 
@@ -15,11 +15,7 @@ export const callbacks: CallbacksType = {
       return false;
     }
 
-    const existingUser = await getUserById(id);
-
-    const isEmailVerified = Boolean(existingUser?.emailVerified);
-
-    return isEmailVerified;
+    return true;
   },
   session({ session, token }) {
     const { user } = session;

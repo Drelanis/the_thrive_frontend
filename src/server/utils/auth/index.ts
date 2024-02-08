@@ -2,13 +2,7 @@ import { apiAuthPrefix, authRoutes, publicRoutes } from '@configs';
 import { NextURL } from 'next/dist/server/web/next-url';
 
 export const isApiAuthRoute = (nextUrl: NextURL) => {
-  const isAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-
-  if (isAuthRoute) {
-    return null;
-  }
-
-  return isAuthRoute;
+  return nextUrl.pathname.startsWith(apiAuthPrefix);
 };
 
 export const isPublicRoute = (pathname: string) => {
