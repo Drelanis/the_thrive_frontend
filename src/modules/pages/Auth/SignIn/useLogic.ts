@@ -27,8 +27,6 @@ export const useLogic = () => {
 
       if (data?.isError) {
         toast.error(data?.message);
-
-        return;
       }
 
       router.push(Routes.DASHBOARD);

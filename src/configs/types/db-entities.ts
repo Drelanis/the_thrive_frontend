@@ -1,2 +1,5 @@
-export type { User as UserType } from '@prisma/client';
-export type { UserRole as UserRoleType } from '@prisma/client';
+export type {
+  User as UserType,
+  VerificationToken as VerificationTokenType,
+  UserRole as UserRoleType,
+} from '@prisma/client';

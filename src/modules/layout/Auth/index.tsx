@@ -1,8 +1,12 @@
 import { AuthContainer } from '@common';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 
 export const AuthLayout = (props: PropsWithChildren) => {
   const { children } = props;
 
-  return <AuthContainer>{children}</AuthContainer>;
+  return (
+    <AuthContainer>
+      <Suspense>{children}</Suspense>
+    </AuthContainer>
+  );
 };
