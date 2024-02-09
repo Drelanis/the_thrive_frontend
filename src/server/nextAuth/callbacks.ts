@@ -1,4 +1,4 @@
-import { PROVIDERS, UserRoles } from '@configs';
+import { Providers, UserRoles } from '@configs';
 import { getUserById } from '@server/actions/user';
 
 import { CallbacksType } from './types';
@@ -7,7 +7,7 @@ export const callbacks: CallbacksType = {
   signIn({ user, account }) {
     const { id } = user;
 
-    if (account?.type !== PROVIDERS.CREDENTIALS) {
+    if (account?.type !== Providers.CREDENTIALS) {
       return true;
     }
 
