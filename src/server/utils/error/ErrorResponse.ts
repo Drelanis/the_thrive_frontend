@@ -9,6 +9,10 @@ export const ErrorResponse = (params: Params) => {
   const { error, extraData } = params;
 
   if (error instanceof Error) {
+    if (error.message === 'NEXT_REDIRECT') {
+      return;
+    }
+
     if (error.name === DEFAULT_ERROR) {
       return {
         isError: true,
