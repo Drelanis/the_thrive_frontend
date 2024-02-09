@@ -2,6 +2,7 @@ export enum Routes {
   HOME = '/',
   SING_IN = '/auth/signIn',
   SING_UP = '/auth/signUp',
+  EMAIL_VERIFY = '/auth/email-verify',
   DASHBOARD = '/dashboard',
 }
 
@@ -17,7 +18,7 @@ export const authRoutes: string[] = ['/auth/signIn', '/auth/signUp'];
  * These routes don't require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = ['/'];
+export const publicRoutes: string[] = ['/', '/auth/email-verify'];
 
 /**
  * The prefix for API authentication routes

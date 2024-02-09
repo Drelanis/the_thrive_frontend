@@ -1,6 +1,6 @@
 type Params = {
-  message: string;
   extraData?: Record<string, unknown>;
+  message?: string;
 };
 
 export const SuccessResponse = (params: Params) => {
