@@ -1,7 +1,4 @@
 module.exports = {
-  compiler: {
-    ignoreBuildErrors: true,
-  },
   reactStrictMode: true,
   modularizeImports: {
     '@mui/material': {
