@@ -16,7 +16,7 @@ import {
   getVerificationTokenByToken,
 } from './token';
 
-const upsertVerificationToken = async (email: string) => {
+export const upsertVerificationToken = async (email: string) => {
   const token = uuid();
 
   const expires = addMinutes(new Date(), TOKEN_EXPIRES);

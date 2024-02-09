@@ -16,13 +16,13 @@ export const useSignUp = (params: Params) => {
     setTransition(async () => {
       const data = await signUp(values);
 
-      if (data.isError) {
+      if (data?.isError) {
         toast.error(data.message);
 
         return;
       }
 
-      toast.success(data.message);
+      toast.success(data?.message);
     });
   }, [values]);
 

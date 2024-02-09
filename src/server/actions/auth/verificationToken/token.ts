@@ -1,7 +1,4 @@
-import { TOKEN_EXPIRES } from '@configs/constants';
 import { db } from '@lib';
-import { addMinutes } from 'date-fns';
-import { v4 as uuid } from 'uuid';
 
 export const getVerificationTokenByToken = async (token: string) => {
   try {
@@ -35,18 +32,4 @@ export const checkTokenExpiration = (date: Date) => {
       'The waiting time has expired, please confirm the mail again',
     );
   }
-};
-
-export const upsertVerificationToken = async (email: string) => {
-  const token = uuid();
-
-  const expires = addMinutes(new Date(), TOKEN_EXPIRES);
-
-  const verificationToken = await db.verificationToken.upsert({
-    where: { email },
-    update: { email, token, expires },
-    create: { email, token, expires },
-  });
-
-  return verificationToken;
 };

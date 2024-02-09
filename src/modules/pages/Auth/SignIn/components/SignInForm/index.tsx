@@ -1,9 +1,9 @@
 import { AuthFormContainer } from '@common';
 import { Routes, SigninDto } from '@configs';
 import { LoadingButton } from '@mui/lab';
-import { Input, InputType } from '@ui';
 import { Control } from 'react-hook-form';
 
+import { Form } from './Form';
 import { StyledLink } from './styles';
 
 type Props = {
@@ -18,15 +18,7 @@ export const SignInForm = (props: Props) => {
 
   return (
     <AuthFormContainer>
-      <Input required fullWidth control={control} name="email" label="Email" />
-      <Input
-        required
-        fullWidth
-        control={control}
-        label="Password"
-        name="password"
-        type={InputType.PASSWORD}
-      />
+      <Form control={control} isTwoFactorForm={false} />
       <LoadingButton
         onClick={onSubmit}
         loading={isPending}
