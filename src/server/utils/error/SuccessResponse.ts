@@ -1,5 +1,5 @@
 type Params = {
-  extraData?: Record<string, unknown>;
+  extraData?: { isTwoFactor?: boolean };
   message?: string;
 };
 
