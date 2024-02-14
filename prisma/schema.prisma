@@ -57,7 +57,7 @@ model VerificationToken {
 
 model TwoFactorToken {
   id      String   @id @default(cuid())
-  email   String
+  email   String   @unique
   token   String   @unique
   expires DateTime
 
@@ -65,7 +65,8 @@ model TwoFactorToken {
 }
 
 model TwoFactorConfirmation {
-  id String @id @default(cuid())
+  id      String   @id @default(cuid())
+  expires DateTime
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
