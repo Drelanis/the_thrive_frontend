@@ -1,6 +1,6 @@
 'use server';
 
-import { TOKEN_EXPIRES } from '@configs/constants';
+import { EMAIL_VERIFICATION_TOKEN_EXPIRES } from '@configs/constants';
 import { db, sendVerificationEmail } from '@lib';
 import {
   getUserByEmail,
@@ -19,7 +19,7 @@ import {
 export const upsertVerificationToken = async (email: string) => {
   const token = uuid();
 
-  const expires = addMinutes(new Date(), TOKEN_EXPIRES);
+  const expires = addMinutes(new Date(), EMAIL_VERIFICATION_TOKEN_EXPIRES);
 
   const verificationToken = await db.verificationToken.upsert({
     where: { email },
