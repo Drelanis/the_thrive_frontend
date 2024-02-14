@@ -1,10 +1,11 @@
 import { Providers, UserRoles } from '@configs';
+import { getTwoFactorConfirmationByUserId } from '@server/actions/auth/twoFactorToken';
 import { getUserById } from '@server/actions/user';
 
 import { CallbacksType } from './types';
 
 export const callbacks: CallbacksType = {
-  signIn({ user, account }) {
+  async signIn({ user, account }) {
     const { id } = user;
 
     if (account?.type !== Providers.CREDENTIALS) {
@@ -13,6 +14,22 @@ export const callbacks: CallbacksType = {
 
     if (!id) {
       return false;
+    }
+
+    const existingUser = await getUserById(id);
+
+    if (!existingUser?.emailVerified) {
+      return false;
+    }
+
+    if (existingUser.isTwoFactorEnabled) {
+      const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+        existingUser.id,
+      );
+
+      if (!twoFactorConfirmation) {
+        return false;
+      }
     }
 
     return true;
@@ -25,6 +42,7 @@ export const callbacks: CallbacksType = {
 
       user.id = id;
       user.role = role as UserRoles;
+      session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
     }
 
     return session;
@@ -39,6 +57,7 @@ export const callbacks: CallbacksType = {
     }
 
     token.role = existingUser.role;
+    token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
     return token;
   },
