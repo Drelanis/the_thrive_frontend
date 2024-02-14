@@ -3,10 +3,6 @@ import { AuthError } from 'next-auth';
 import { ErrorResponse } from './ErrorResponse';
 
 export const SignInErrorResponse = (error: unknown) => {
-  if (error instanceof Object) {
-    return ErrorResponse({ error });
-  }
-
   if (error instanceof AuthError) {
     switch (error.type) {
       case 'CredentialsSignin':
@@ -20,6 +16,10 @@ export const SignInErrorResponse = (error: unknown) => {
           message: 'Something went wrong!',
         };
     }
+  }
+
+  if (error instanceof Object) {
+    return ErrorResponse({ error });
   }
 
   throw error;
