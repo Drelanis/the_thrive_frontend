@@ -1,6 +1,7 @@
 export type SigninDto = {
   email: string;
   password: string;
+  twoFactorCode?: string;
 };
 
 export type SignUpDto = {
