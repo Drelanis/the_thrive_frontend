@@ -7,3 +7,9 @@ export interface DefaultJWT extends Record<string, unknown> {
   picture?: string | null;
   sub?: string;
 }
+
+export type SuccessResponse = {
+  isError: boolean;
+  isTwoFactor?: boolean;
+  message?: string;
+};
