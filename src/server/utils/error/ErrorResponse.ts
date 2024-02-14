@@ -1,12 +1,13 @@
 import { DEFAULT_ERROR } from '@configs';
 
 type Params = {
-  error: unknown;
+  error?: unknown;
   extraData?: Record<string, unknown>;
+  message?: string;
 };
 
 export const ErrorResponse = (params: Params) => {
-  const { error, extraData } = params;
+  const { error, extraData, message } = params;
 
   if (error instanceof Error) {
     if (error.message === 'NEXT_REDIRECT') {
@@ -31,7 +32,7 @@ export const ErrorResponse = (params: Params) => {
 
   return {
     isError: true,
-    message: 'An unknown error occurred!',
+    message,
     ...extraData,
   };
 };
