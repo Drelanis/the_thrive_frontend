@@ -9,7 +9,8 @@ import { SignInForm } from './components';
 import { useLogic } from './useLogic';
 
 export const SignIn = () => {
-  const { onSubmit, control, isPending, isValid } = useLogic();
+  const { onSubmit, control, isPending, isValid, isTwoFactor, setValue } =
+    useLogic();
 
   return (
     <AuthContainer>
@@ -20,10 +21,12 @@ export const SignIn = () => {
         linkText="Sign up"
       />
       <SignInForm
+        isTwoFactor={isTwoFactor}
         control={control}
         onSubmit={onSubmit}
         isValid={isValid}
         isPending={isPending}
+        setValue={setValue}
       />
       <Divider>OR</Divider>
       <AuthButtons isPending={isPending} />

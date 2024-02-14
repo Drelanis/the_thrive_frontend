@@ -11,4 +11,5 @@ export const signInValidationSchema = yup.object({
     .string()
     .required(ValidationHints.REQUIRED)
     .min(MAX_PASSWORD_VALUE, ValidationHints.PASSWORD_SHORT),
+  twoFactorCode: yup.string().optional(),
 });

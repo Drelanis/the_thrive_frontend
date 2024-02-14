@@ -1,14 +1,20 @@
 import { SigninDto } from '@configs';
 import { Input, InputType } from '@ui';
-import { Control } from 'react-hook-form';
+import { useEffect } from 'react';
+import { Control, UseFormSetValue } from 'react-hook-form';
 
 type Props = {
   control: Control<SigninDto>;
   isTwoFactorForm: boolean;
+  setValue: UseFormSetValue<SigninDto>;
 };
 
 export const Form = (props: Props) => {
-  const { control, isTwoFactorForm } = props;
+  const { control, isTwoFactorForm, setValue } = props;
+
+  useEffect(() => {
+    setValue('twoFactorCode', '', { shouldValidate: true });
+  }, [isTwoFactorForm]);
 
   if (isTwoFactorForm) {
     return (
@@ -16,7 +22,7 @@ export const Form = (props: Props) => {
         required
         fullWidth
         control={control}
-        name="email"
+        name="twoFactorCode"
         label="Two-factor code"
       />
     );
