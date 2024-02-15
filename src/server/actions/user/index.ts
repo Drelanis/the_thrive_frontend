@@ -68,17 +68,21 @@ export const createUser = async (dto: Omit<SignUpDto, 'repeatPassword'>) => {
 };
 
 export const updateUserByEmailVerified = async (email: string) => {
-  const existingUser = await getUserByEmail(email);
+  try {
+    const existingUser = await getUserByEmail(email);
 
-  if (!existingUser) {
-    throw new Error('Email does not exist!');
+    if (!existingUser) {
+      throw new Error('Email does not exist!');
+    }
+
+    await db.user.update({
+      where: { id: existingUser.id },
+      data: {
+        emailVerified: new Date(),
+        email,
+      },
+    });
+  } catch (error) {
+    return null;
   }
-
-  await db.user.update({
-    where: { id: existingUser.id },
-    data: {
-      emailVerified: new Date(),
-      email,
-    },
-  });
 };
