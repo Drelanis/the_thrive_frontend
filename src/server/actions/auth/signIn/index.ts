@@ -8,10 +8,7 @@ import { SignInErrorResponse } from '@server/utils';
 
 import { checkEmailVerification } from '../verificationToken';
 
-import {
-  twoFactorCodeVerification,
-  twoFactorDataVerification,
-} from './helpers';
+import { handleTwoFactorAuth } from './helpers';
 
 export const signIn = async (values: SigninDto) => {
   try {
@@ -19,24 +16,23 @@ export const signIn = async (values: SigninDto) => {
 
     await signInValidationSchema.validate(values);
 
-    const existingUser = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
 
-    if (!existingUser) {
+    if (!user) {
       throw new Error('Email does not exist!');
     }
 
     await checkEmailVerification(email);
 
-    if (existingUser.isTwoFactorEnabled && !twoFactorCode) {
-      const response = await twoFactorDataVerification(existingUser.id, email);
+    const twoFactoResponse = await handleTwoFactorAuth(
+      user.id,
+      user?.isTwoFactorEnabled,
+      user.email,
+      twoFactorCode,
+    );
 
-      if (response) {
-        return response;
-      }
-    }
-
-    if (twoFactorCode) {
-      await twoFactorCodeVerification(email, twoFactorCode);
+    if (twoFactoResponse) {
+      return twoFactoResponse;
     }
 
     await NASignIn(Providers.CREDENTIALS, {
