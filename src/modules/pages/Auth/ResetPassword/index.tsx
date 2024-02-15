@@ -3,12 +3,12 @@
 import { AuthFormContainer, AuthTitle } from '@common';
 import { Routes } from '@configs';
 import { LoadingButton } from '@mui/lab';
-import { Input } from '@ui';
+import { Input, Toast } from '@ui';
 
 import { useLogic } from './useLogic';
 
 export const ResetPassword = () => {
-  const { control, isValid, onSubmit } = useLogic();
+  const { control, isValid, onSubmit, isPending } = useLogic();
 
   return (
     <>
@@ -28,8 +28,8 @@ export const ResetPassword = () => {
         />
         <LoadingButton
           onClick={onSubmit}
-          loading={false}
-          disabled={!isValid || false}
+          loading={isPending}
+          disabled={!isValid || isPending}
           variant="contained"
           type="submit"
           fullWidth
@@ -37,6 +37,7 @@ export const ResetPassword = () => {
           SEND RESET EMAIL
         </LoadingButton>
       </AuthFormContainer>
+      <Toast />
     </>
   );
 };

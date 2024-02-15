@@ -2,13 +2,14 @@
 
 import { AuthTitle } from '@common';
 import { Routes } from '@configs';
+import { Toast } from '@ui';
 import React from 'react';
 
 import { ResetPasswordForm } from './components';
 import { useLogic } from './useLogic';
 
 export const NewPassword = () => {
-  const { control, isValid, onSubmit } = useLogic();
+  const { control, isValid, onSubmit, isPending } = useLogic();
 
   return (
     <>
@@ -21,9 +22,10 @@ export const NewPassword = () => {
       <ResetPasswordForm
         control={control}
         isValid={isValid}
-        isPending={false}
+        isPending={isPending}
         onSubmit={onSubmit}
       />
+      <Toast />
     </>
   );
 };

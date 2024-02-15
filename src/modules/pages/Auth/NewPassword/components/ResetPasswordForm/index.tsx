@@ -49,7 +49,7 @@ export const ResetPasswordForm = (props: Props) => {
         type="submit"
         fullWidth
       >
-        CONFIRM
+        RESET PASSWORD
       </LoadingButton>
     </AuthFormContainer>
   );
