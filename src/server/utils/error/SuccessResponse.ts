@@ -1,5 +1,8 @@
 type Params = {
-  extraData?: { isTwoFactor?: boolean };
+  extraData?: {
+    isRedirect: boolean;
+    isTwoFactor?: boolean;
+  };
   message?: string;
 };
 

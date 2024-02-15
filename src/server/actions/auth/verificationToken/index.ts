@@ -69,7 +69,10 @@ export const repeatMailVerification = async (token: string) => {
     const verificationToken = await getVerificationTokenByToken(token);
 
     if (!verificationToken) {
-      return SuccessResponse({});
+      return SuccessResponse({
+        extraData: { isRedirect: true },
+        message: 'Repeat the process of logging into the account',
+      });
     }
 
     const { email } = verificationToken;

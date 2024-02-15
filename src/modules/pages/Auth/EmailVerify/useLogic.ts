@@ -1,61 +1,78 @@
+import { Routes } from '@configs';
 import { emailVerify, repeatMailVerification } from '@server';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export const useLogic = () => {
   const searchParams = useSearchParams();
-
-  const [isVerified, setVerified] = useState(false);
+  const router = useRouter();
 
   const token = searchParams.get('token');
 
-  const [isPending, setTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
+  const [isVerified, setVerified] = useState(false);
+  const [isError, setError] = useState(false);
 
-  const onVerify = () => {
-    setTransition(async () => {
-      if (!token) {
-        toast.error('Something went wrong!');
+  const onVerify = useCallback(async () => {
+    if (!token) {
+      setError(true);
+      setIsPending(false);
+      toast.error('Something went wrong!');
 
-        return;
-      }
+      return;
+    }
 
-      const data = await emailVerify(token);
+    const data = await emailVerify(token);
 
-      if (data?.isError) {
-        toast.error(data.message);
+    if (data?.isError) {
+      setError(true);
+      setIsPending(false);
+      toast.error(data.message);
 
-        return;
-      }
+      return;
+    }
 
-      setVerified(true);
+    setIsPending(false);
+    setVerified(true);
 
-      toast.success(data?.message);
-    });
-  };
+    toast.success(data?.message);
+  }, [token]);
 
-  const sendVerificationEmail = () => {
-    setTransition(async () => {
-      const response = await repeatMailVerification(token || '');
+  const sendVerificationEmail = useCallback(async () => {
+    const response = await repeatMailVerification(token || '');
 
-      if (response?.isError) {
-        toast.error(response.message);
+    if (response?.isError) {
+      setError(true);
+      setIsPending(false);
 
-        return;
-      }
+      toast.error(response.message);
 
-      toast.success(response?.message);
-    });
-  };
+      return;
+    }
+
+    if (response && 'isRedirect' in response) {
+      router.push(Routes.SING_IN);
+      toast.error(response.message);
+
+      return;
+    }
+
+    setIsPending(false);
+
+    toast.success(response?.message);
+  }, [token]);
 
   useEffect(() => {
-    setVerified(false);
-    onVerify();
+    setError(false);
+    setIsPending(true);
+    void onVerify();
   }, [token]);
 
   return {
     isPending,
     isVerified,
     sendVerificationEmail,
+    isError,
   };
 };
