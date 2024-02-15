@@ -1,4 +1,4 @@
-import { Routes, SuccessResponse } from '@configs';
+import { Routes } from '@configs';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInStore, signInValidationSchema } from '@modules/stores';
 import { signIn } from '@server';
@@ -25,9 +25,9 @@ export const useLogic = () => {
 
   const onSubmit = () => {
     setTransition(async () => {
-      const data = (await signIn(getValues())) as SuccessResponse;
+      const data = await signIn(getValues());
 
-      if (data.isTwoFactor) {
+      if (data && 'isTwoFactor' in data) {
         toast.info(data?.message);
         setIsTwoFactor(true);
 
