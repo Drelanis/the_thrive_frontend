@@ -10,6 +10,10 @@ export type NewPasswordDto = {
   repeatNewPassword: string;
 };
 
+export type ResetPasswordDto = {
+  email: string;
+};
+
 export type SignUpDto = {
   email: string;
   firstName: string;
