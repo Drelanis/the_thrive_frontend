@@ -3,6 +3,8 @@ export enum Routes {
   SING_IN = '/auth/signIn',
   SING_UP = '/auth/signUp',
   EMAIL_VERIFY = '/auth/email-verify',
+  NEW_PASSWORD = '/auth/new-password',
+  RESET_PASSWORD = '/auth/reset-password',
   DASHBOARD = '/dashboard',
 }
 
@@ -11,14 +13,19 @@ export enum Routes {
  * These routes will redirect logged in users to /dashboard
  * @type {string[]}
  */
-export const authRoutes: string[] = ['/auth/signIn', '/auth/signUp'];
+export const authRoutes: string[] = [
+  Routes.SING_IN,
+  Routes.SING_UP,
+  Routes.RESET_PASSWORD,
+  Routes.NEW_PASSWORD,
+];
 
 /**
  * An array of routes that are accessible to the public
  * These routes don't require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = ['/', '/auth/email-verify'];
+export const publicRoutes: string[] = [Routes.HOME, Routes.EMAIL_VERIFY];
 
 /**
  * The prefix for API authentication routes

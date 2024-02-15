@@ -38,7 +38,7 @@ export const SignInForm = (props: Props) => {
       >
         {buttonTitle}
       </LoadingButton>
-      <StyledLink underline="none" href={Routes.RESET_PASSWORD}>
+      <StyledLink underline="none" href={Routes.NEW_PASSWORD}>
         Forgot Password?
       </StyledLink>
     </AuthFormContainer>

@@ -1,6 +1,6 @@
-import { ResetPasswordDto } from '@configs';
+import { NewPasswordDto } from '@configs';
 
-export const resetPasswordStore: ResetPasswordDto = {
+export const newPasswordStore: NewPasswordDto = {
   currentPassword: '',
   newPassword: '',
   repeatNewPassword: '',

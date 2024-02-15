@@ -4,7 +4,7 @@ import { ValidationHints } from '@configs';
 import { MAX_PASSWORD_VALUE } from '@configs/constants';
 import * as yup from 'yup';
 
-export const resetPasswordValidationSchema = yup.object({
+export const newPasswordValidationSchema = yup.object({
   currentPassword: yup
     .string()
     .required(ValidationHints.REQUIRED)

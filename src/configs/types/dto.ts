@@ -4,6 +4,12 @@ export type SigninDto = {
   twoFactorCode?: string;
 };
 
+export type NewPasswordDto = {
+  currentPassword: string;
+  newPassword: string;
+  repeatNewPassword: string;
+};
+
 export type SignUpDto = {
   email: string;
   firstName: string;
