@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthButtons, AuthContainer, AuthTitle } from '@common';
+import { AuthButtons, AuthTitle } from '@common';
 import { Routes } from '@configs';
 import { Divider } from '@mui/material';
 import { Toast } from '@ui';
@@ -13,7 +13,7 @@ export const SignIn = () => {
     useLogic();
 
   return (
-    <AuthContainer>
+    <>
       <AuthTitle
         header="Welcome back"
         subHeader="Don't have an account?"
@@ -31,6 +31,6 @@ export const SignIn = () => {
       <Divider>OR</Divider>
       <AuthButtons isPending={isPending} />
       <Toast />
-    </AuthContainer>
+    </>
   );
 };
