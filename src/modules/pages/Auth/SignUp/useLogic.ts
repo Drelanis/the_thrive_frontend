@@ -14,7 +14,9 @@ export const useLogic = () => {
     mode: 'onChange',
   });
 
-  const { isPending, onSignUp } = useSignUp({ values: getValues() });
+  const { isPending, onSignUp } = useSignUp({
+    values: getValues(),
+  });
 
   return {
     control,
