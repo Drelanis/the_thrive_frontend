@@ -12,7 +12,14 @@ export const newPasswordValidationSchema = yup.object({
   newPassword: yup
     .string()
     .required(ValidationHints.REQUIRED)
-    .min(MAX_PASSWORD_VALUE, ValidationHints.PASSWORD_SHORT),
+    .min(MAX_PASSWORD_VALUE, ValidationHints.PASSWORD_SHORT)
+    .test(
+      'passwords-match',
+      ValidationHints.EQUALITY_OF_THE_NEW_PASSWORD,
+      function (value) {
+        return this.parent.currentPassword !== value;
+      },
+    ),
   repeatNewPassword: yup
     .string()
     .required(ValidationHints.REQUIRED)

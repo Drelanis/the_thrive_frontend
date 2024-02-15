@@ -86,3 +86,31 @@ export const updateUserByEmailVerified = async (email: string) => {
     return null;
   }
 };
+
+export const updateUserPassword = async (
+  userId: string,
+  tokenId: string,
+  userPassword: string,
+  currentPassword: string,
+  newPassword: string,
+) => {
+  const isPasswordsMatch = await bcrypt.compare(currentPassword, userPassword);
+
+  if (!isPasswordsMatch) {
+    throw new Error('Invalid current password!');
+  }
+
+  const hashedNewPassword = await bcrypt.hash(
+    newPassword,
+    Number(process.env.BCRYPT_SALT) || 0,
+  );
+
+  await db.user.update({
+    where: { id: userId },
+    data: { password: hashedNewPassword },
+  });
+
+  await db.passwordResetToken.delete({
+    where: { id: tokenId },
+  });
+};

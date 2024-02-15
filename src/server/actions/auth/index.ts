@@ -4,3 +4,4 @@ export * from './verificationToken';
 export * from './twoFactorToken';
 export * from './resetPassword';
 export * from './resetPasswordToken';
+export * from './updatePassword';
