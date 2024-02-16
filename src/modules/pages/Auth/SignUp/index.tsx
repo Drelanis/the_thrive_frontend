@@ -26,7 +26,7 @@ export const SignUp = () => {
         isPending={isPending}
       />
       <StyledDivider>OR</StyledDivider>
-      <AuthButtons isPending={isPending} />
+      <AuthButtons />
       <Toast />
     </>
   );

@@ -29,7 +29,7 @@ export const SignIn = () => {
         setValue={setValue}
       />
       <Divider>OR</Divider>
-      <AuthButtons isPending={isPending} />
+      <AuthButtons />
       <Toast />
     </>
   );
