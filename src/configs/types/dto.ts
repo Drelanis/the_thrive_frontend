@@ -5,7 +5,6 @@ export type SigninDto = {
 };
 
 export type NewPasswordDto = {
-  currentPassword: string;
   newPassword: string;
   repeatNewPassword: string;
 };

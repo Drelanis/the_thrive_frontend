@@ -18,7 +18,7 @@ export const updatePassword = async (
 
     await newPasswordValidationSchema.validate(values);
 
-    const { currentPassword, newPassword } = values;
+    const { newPassword } = values;
 
     const existingToken = await checkTokenExpires(token);
 
@@ -28,7 +28,6 @@ export const updatePassword = async (
       user.id,
       existingToken.id,
       user.password!,
-      currentPassword,
       newPassword,
     );
 

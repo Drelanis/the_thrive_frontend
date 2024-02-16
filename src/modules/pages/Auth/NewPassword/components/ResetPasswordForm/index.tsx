@@ -21,14 +21,6 @@ export const ResetPasswordForm = (props: Props) => {
         required
         fullWidth
         control={control}
-        label="Current password"
-        name="currentPassword"
-        type={InputType.PASSWORD}
-      />
-      <Input
-        required
-        fullWidth
-        control={control}
         label="New password"
         name="newPassword"
         type={InputType.PASSWORD}

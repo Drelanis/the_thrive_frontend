@@ -91,13 +91,12 @@ export const updateUserPassword = async (
   userId: string,
   tokenId: string,
   userPassword: string,
-  currentPassword: string,
   newPassword: string,
 ) => {
-  const isPasswordsMatch = await bcrypt.compare(currentPassword, userPassword);
+  const isPasswordsMatch = await bcrypt.compare(newPassword, userPassword);
 
-  if (!isPasswordsMatch) {
-    throw new Error('Invalid current password!');
+  if (isPasswordsMatch) {
+    throw new Error('The old and new passwords must not be the same!');
   }
 
   const hashedNewPassword = await bcrypt.hash(
