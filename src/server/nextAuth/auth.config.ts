@@ -35,7 +35,9 @@ export default {
     }),
     Credentials({
       async authorize(credentials) {
-        return NAAuthorize(credentials as SignUpDto | null);
+        const response = await NAAuthorize(credentials as SignUpDto | null);
+
+        return response;
       },
     }),
   ],
