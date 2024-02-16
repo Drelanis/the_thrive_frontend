@@ -1,21 +1,21 @@
 import { Providers } from '@configs';
 import { signIn } from 'next-auth/react';
-import { useTransition } from 'react';
+import { useCallback, useTransition } from 'react';
 
 export const useLogic = () => {
   const [isPending, startTransition] = useTransition();
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = useCallback(() => {
     startTransition(async () => {
       await signIn(Providers.GOOGLE);
     });
-  };
+  }, [startTransition]);
 
-  const signInWithGitHub = () => {
+  const signInWithGitHub = useCallback(() => {
     startTransition(async () => {
       await signIn(Providers.GITHUB);
     });
-  };
+  }, [startTransition]);
 
   return { signInWithGoogle, signInWithGitHub, isPending };
 };
