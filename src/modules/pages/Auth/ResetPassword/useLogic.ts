@@ -4,7 +4,7 @@ import {
   resetPasswordValidationSchema,
 } from '@modules/stores';
 import { sendEmailForResetPassword } from '@server';
-import { useTransition } from 'react';
+import { useCallback, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -21,7 +21,7 @@ export const useLogic = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     startTransition(async () => {
       const data = await sendEmailForResetPassword(getValues());
 
@@ -33,7 +33,7 @@ export const useLogic = () => {
 
       toast.success(data?.message);
     });
-  };
+  }, [startTransition]);
 
   return {
     control,

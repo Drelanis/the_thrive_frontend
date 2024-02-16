@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { newPasswordStore, newPasswordValidationSchema } from '@modules/stores';
 import { updatePassword } from '@server';
 import { useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
+import { useCallback, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -20,7 +20,7 @@ export const useLogic = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     startTransition(async () => {
       const token = searchParams.get('token');
 
@@ -34,7 +34,7 @@ export const useLogic = () => {
 
       toast.success(data?.message);
     });
-  };
+  }, [startTransition]);
 
   return {
     control,
