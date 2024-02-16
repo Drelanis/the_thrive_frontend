@@ -15,7 +15,7 @@ export const useLogic = () => {
   });
 
   const { isPending, onSignUp } = useSignUp({
-    values: getValues(),
+    getValues,
   });
 
   return {

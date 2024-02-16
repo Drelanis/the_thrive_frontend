@@ -5,12 +5,12 @@ import { SetStateAction, useCallback, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
 type Params = {
-  dto: SigninDto;
+  getValues: () => SigninDto;
   setIsTwoFactor: (value: SetStateAction<boolean>) => void;
 };
 
 export const useSignIn = (params: Params) => {
-  const { dto, setIsTwoFactor } = params;
+  const { setIsTwoFactor, getValues } = params;
 
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export const useSignIn = (params: Params) => {
 
   const onSignIn = useCallback(() => {
     startTransition(async () => {
-      const data = await signIn(dto);
+      const data = await signIn(getValues());
 
       if (data && 'isTwoFactor' in data) {
         toast.info(data?.message);
@@ -33,7 +33,7 @@ export const useSignIn = (params: Params) => {
 
       router.push(Routes.DASHBOARD);
     });
-  }, [dto, startTransition]);
+  }, [startTransition]);
 
   return { isPending, onSignIn };
 };

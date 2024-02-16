@@ -4,17 +4,17 @@ import { useCallback, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
 type Params = {
-  values: SignUpDto;
+  getValues: () => SignUpDto;
 };
 
 export const useSignUp = (params: Params) => {
-  const { values } = params;
+  const { getValues } = params;
 
   const [isPending, startTransition] = useTransition();
 
   const onSignUp = useCallback(() => {
     startTransition(async () => {
-      const data = await signUp(values);
+      const data = await signUp(getValues());
 
       if (data?.isError) {
         toast.error(data.message);
@@ -24,7 +24,7 @@ export const useSignUp = (params: Params) => {
 
       toast.success(data?.message);
     });
-  }, [values, startTransition]);
+  }, [startTransition]);
 
   return { isPending, onSignUp };
 };

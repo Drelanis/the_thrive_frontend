@@ -19,8 +19,8 @@ export const useLogic = () => {
   });
 
   const { isPending, onSignIn } = useSignIn({
-    dto: getValues(),
     setIsTwoFactor,
+    getValues,
   });
 
   return {
