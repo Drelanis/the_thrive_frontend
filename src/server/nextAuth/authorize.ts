@@ -4,28 +4,32 @@ import { getUserByEmail } from '@server/actions/user';
 import bcrypt from 'bcryptjs';
 
 export const authorize = async (credentials: SignUpDto | null) => {
-  if (!credentials) {
-    return null;
-  }
+  try {
+    if (!credentials) {
+      return null;
+    }
 
-  const { email, password } = credentials;
+    const { email, password } = credentials;
 
-  await signInValidationSchema.validate({
-    email,
-    password,
-  });
+    await signInValidationSchema.validate({
+      email,
+      password,
+    });
 
-  const user = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
 
-  if (!user || !user?.password) {
-    return null;
-  }
+    if (!user || !user?.password) {
+      return null;
+    }
 
-  const passwordsMatch = await bcrypt.compare(password, user.password);
+    const passwordsMatch = await bcrypt.compare(password, user.password);
 
-  if (passwordsMatch) {
+    if (!passwordsMatch) {
+      return null;
+    }
+
     return user;
+  } catch (error) {
+    return null;
   }
-
-  return null;
 };
