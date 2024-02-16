@@ -10,10 +10,10 @@ type Params = {
 export const useSignUp = (params: Params) => {
   const { values } = params;
 
-  const [isPending, setTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   const onSignUp = useCallback(() => {
-    setTransition(async () => {
+    startTransition(async () => {
       const data = await signUp(values);
 
       if (data?.isError) {
@@ -24,7 +24,7 @@ export const useSignUp = (params: Params) => {
 
       toast.success(data?.message);
     });
-  }, [values]);
+  }, [values, startTransition]);
 
   return { isPending, onSignUp };
 };
