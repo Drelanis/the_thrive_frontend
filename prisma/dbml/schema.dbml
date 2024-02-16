@@ -1,0 +1,87 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  name String
+  firstName String
+  lastName String
+  email String [unique]
+  emailVerified DateTime
+  password String
+  image String
+  accounts Account [not null]
+  role UserRole [not null, default: 'USER']
+  isTwoFactorEnabled Boolean [not null, default: false]
+  twoFactorConfirmation TwoFactorConfirmation
+}
+
+Table Account {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  user User [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table VerificationToken {
+  id String [pk]
+  email String [unique, not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table PasswordResetToken {
+  id String [pk]
+  email String [unique, not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table TwoFactorToken {
+  id String [pk]
+  email String [unique, not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table TwoFactorConfirmation {
+  id String [pk]
+  expires DateTime [not null]
+  userId String [unique, not null]
+  user User [not null]
+}
+
+Enum UserRole {
+  USER
+  COMPANY
+}
+
+Ref: Account.userId > User.id [delete: Cascade]
+
+Ref: TwoFactorConfirmation.userId - User.id [delete: Cascade]
