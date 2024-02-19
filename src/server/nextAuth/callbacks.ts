@@ -1,22 +1,34 @@
 import { Providers, UserRoles } from '@configs';
 import { getTwoFactorConfirmationByUserId } from '@server/actions/auth/twoFactorToken';
-import { getUserById } from '@server/actions/user';
+import {
+  getUserById,
+  updateUserEmailVerifiedById,
+  updateUserImageById,
+} from '@server/actions/user';
 
 import { CallbacksType } from './types';
 
 export const callbacks: CallbacksType = {
-  async signIn({ user, account }) {
+  async signIn({ user, account, profile }) {
     const { id } = user;
-
-    if (account?.type !== Providers.CREDENTIALS) {
-      return true;
-    }
 
     if (!id) {
       return false;
     }
 
     const existingUser = await getUserById(id);
+
+    if (account?.type !== Providers.CREDENTIALS) {
+      if (!existingUser?.emailVerified) {
+        await updateUserEmailVerifiedById(id);
+      }
+
+      if (!existingUser?.image && profile?.picture) {
+        await updateUserImageById(id, profile?.picture as string);
+      }
+
+      return true;
+    }
 
     if (!existingUser?.emailVerified) {
       return false;
@@ -42,7 +54,8 @@ export const callbacks: CallbacksType = {
 
       user.id = id;
       user.role = role as UserRoles;
-      session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+      user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+      user.emailVerified = token.emailVerified as Date;
     }
 
     return session;
@@ -56,6 +69,7 @@ export const callbacks: CallbacksType = {
       return token;
     }
 
+    token.emailVerified = existingUser.emailVerified;
     token.role = existingUser.role;
     token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
