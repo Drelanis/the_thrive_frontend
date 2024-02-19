@@ -20,16 +20,20 @@ export default {
     async linkAccount({ user }) {
       await db.user.update({
         where: { id: user.id },
-        data: { emailVerified: new Date() },
+        data: {
+          emailVerified: new Date(),
+        },
       });
     },
   },
   providers: [
     Google({
+      allowDangerousEmailAccountLinking: true,
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     GitHub({
+      allowDangerousEmailAccountLinking: true,
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),

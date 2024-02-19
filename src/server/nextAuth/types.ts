@@ -1,6 +1,6 @@
 import { AdapterUser } from '@auth/core/adapters';
 import { JWT } from '@auth/core/jwt';
-import { Account, Awaitable, User } from '@auth/core/types';
+import { Account, Awaitable, Profile, User } from '@auth/core/types';
 import { DefaultJWT } from '@configs';
 import { Session } from 'next-auth';
 
@@ -16,6 +16,7 @@ type JWTParams = {
 type SignInParams = {
   account: Account | null;
   user: User | AdapterUser;
+  profile?: Profile;
 };
 
 export type CallbacksType = {

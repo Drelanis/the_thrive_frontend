@@ -113,3 +113,36 @@ export const updateUserPassword = async (
     where: { id: tokenId },
   });
 };
+
+export const updateUserEmailVerifiedById = async (id: string) => {
+  try {
+    return await db.user.update({
+      where: {
+        id,
+      },
+      data: {
+        emailVerified: new Date(),
+      },
+    });
+  } catch (error) {
+    return null;
+  }
+};
+
+export const updateUserImageById = async (
+  id: string,
+  image: string | undefined,
+) => {
+  try {
+    return await db.user.update({
+      where: {
+        id,
+      },
+      data: {
+        image,
+      },
+    });
+  } catch (error) {
+    return null;
+  }
+};
