@@ -6,6 +6,8 @@ export enum Routes {
   NEW_PASSWORD = '/auth/new-password',
   RESET_PASSWORD = '/auth/reset-password',
   DASHBOARD = '/dashboard',
+  MOBILE_SIGN_IN = '/api/mobile-auth/signIn',
+  MOBILE_SIGN_OUT = '/api/mobile-auth/signOut',
 }
 
 /**
@@ -25,7 +27,12 @@ export const authRoutes: string[] = [
  * These routes don't require authentication
  * @type {string[]}
  */
-export const publicRoutes: string[] = [Routes.HOME, Routes.EMAIL_VERIFY];
+export const publicRoutes: string[] = [
+  Routes.HOME,
+  Routes.EMAIL_VERIFY,
+  Routes.MOBILE_SIGN_IN,
+  Routes.MOBILE_SIGN_OUT,
+];
 
 /**
  * The prefix for API authentication routes
