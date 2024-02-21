@@ -19,7 +19,7 @@ Table User {
 
 Table Account {
   id String [pk]
-  userId String [not null]
+  userId String [unique, not null]
   type String [not null]
   provider String [not null]
   providerAccountId String [not null]
