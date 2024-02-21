@@ -33,38 +33,34 @@ export const getUserByEmail = async (
 };
 
 export const createUser = async (dto: Omit<SignUpDto, 'repeatPassword'>) => {
-  try {
-    const { firstName, lastName, email, password } = dto;
+  const { firstName, lastName, email, password } = dto;
 
-    const name = `${firstName} ${lastName}`;
+  const name = `${firstName} ${lastName}`;
 
-    const existingCompany = await getUserByEmail(email);
+  const existingUser = await getUserByEmail(email);
 
-    if (existingCompany) {
-      throw new Error(
-        'A company with this email address has already been created',
-      );
-    }
-
-    const hashedPassword = await bcrypt.hash(
-      password,
-      Number(process.env.BCRYPT_SALT) || 0,
+  if (existingUser) {
+    throw new Error(
+      'A company with this email address has already been created',
     );
-
-    const user = await db.user.create({
-      data: {
-        name,
-        firstName,
-        lastName,
-        email,
-        password: hashedPassword,
-      },
-    });
-
-    return user;
-  } catch (error) {
-    return null;
   }
+
+  const hashedPassword = await bcrypt.hash(
+    password,
+    Number(process.env.BCRYPT_SALT) || 0,
+  );
+
+  const user = await db.user.create({
+    data: {
+      name,
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    },
+  });
+
+  return user;
 };
 
 export const updateUserByEmailVerified = async (email: string) => {
