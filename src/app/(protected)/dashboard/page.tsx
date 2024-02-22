@@ -11,7 +11,7 @@ const Dashboard = async () => {
           'use server';
 
           if (session && session.user.id) {
-            await signOut(session.user.id);
+            await signOut(session.user.id, session.user.agent);
           }
 
           await NASignOut();
