@@ -5,5 +5,6 @@ export interface DefaultJWT extends Record<string, unknown> {
   jti?: string;
   name?: string | null;
   picture?: string | null;
+  sessionId?: string;
   sub?: string;
 }

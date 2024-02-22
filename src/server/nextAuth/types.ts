@@ -21,6 +21,6 @@ type SignInParams = {
 
 export type CallbacksType = {
   jwt: (params: JWTParams) => Promise<JWT>;
-  session: (params: SessionParams) => Session;
+  session: (params: SessionParams) => Promise<Session>;
   signIn: (params: SignInParams) => Awaitable<boolean>;
 };
