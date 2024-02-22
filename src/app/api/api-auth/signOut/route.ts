@@ -1,12 +1,23 @@
-import { ErrorResponse, SuccessResponse } from '@server';
+'use server';
+
+import {
+  auth,
+  deleteSessionByUserId,
+  ErrorResponse,
+  SuccessResponse,
+} from '@server';
 import { cookies } from 'next/headers';
 
-export const GET = () => {
+export const GET = async () => {
   const sessionToken = cookies().get('authjs.session-token');
 
-  if (!sessionToken) {
+  const session = await auth();
+
+  if (!sessionToken || !session?.user.id) {
     return Response.json(ErrorResponse({}));
   }
+
+  await deleteSessionByUserId(session.user.id);
 
   cookies().delete('authjs.session-token');
 
