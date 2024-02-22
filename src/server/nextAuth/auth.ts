@@ -1,14 +1,21 @@
+// ! TODO
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import NextAuth from 'next-auth';
 
 import authConfig from './auth.config';
-import { callbacks } from './callbacks';
+import { getCallbacks } from './callbacks';
 
 export const {
   handlers: { GET, POST },
   auth,
   signIn: NASignIn,
   signOut: NASignOut,
-} = NextAuth({
-  callbacks,
-  ...authConfig,
+} = NextAuth((request?: Request) => {
+  const callbacks = getCallbacks(request);
+
+  return {
+    callbacks,
+    ...authConfig,
+  };
 });

@@ -6,6 +6,7 @@ import {
   SignUpDto,
 } from '@configs';
 import { db } from '@lib';
+import { userAgent } from 'next/server';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GitHub from 'next-auth/providers/github';
@@ -46,10 +47,12 @@ export default {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     Credentials({
-      async authorize(credentials) {
-        const response = await NAAuthorize(credentials as SignUpDto | null);
+      async authorize(credentials, request: Request) {
+        const agent = userAgent(request).ua;
 
-        return response;
+        const user = await NAAuthorize(credentials as SignUpDto | null);
+
+        return { agent, ...user };
       },
     }),
   ],
