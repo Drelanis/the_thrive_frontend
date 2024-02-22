@@ -3,9 +3,10 @@
 import { Providers, SigninDto } from '@configs';
 import { signInValidationSchema } from '@modules/stores';
 import { getUserByEmail } from '@server/actions/user';
-import { NASignIn } from '@server/nextAuth';
+import { NASignIn } from '@server/nextAuth/auth';
 import { SignInErrorResponse } from '@server/utils';
 
+import { upsertSession } from '../session';
 import { checkEmailVerification } from '../verificationToken';
 
 import { handleTwoFactorAuth } from './helpers';
@@ -21,6 +22,8 @@ export const signIn = async (values: SigninDto) => {
     if (!user) {
       throw new Error('Email does not exist!');
     }
+
+    await upsertSession(user);
 
     await checkEmailVerification(email);
 
