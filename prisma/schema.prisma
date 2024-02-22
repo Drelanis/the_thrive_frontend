@@ -19,9 +19,12 @@ enum UserRole {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String   @unique
+  userId       String
+  userAgent    String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, userAgent], name: "userId_userAgent")
 }
 
 model User {

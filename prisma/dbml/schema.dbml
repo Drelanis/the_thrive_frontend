@@ -5,9 +5,14 @@
 Table Session {
   id String [pk]
   sessionToken String [unique, not null]
-  userId String [unique, not null]
+  userId String [not null]
+  userAgent String [not null]
   expires DateTime [not null]
   user User [not null]
+
+  indexes {
+    (userId, userAgent) [unique]
+  }
 }
 
 Table User {
