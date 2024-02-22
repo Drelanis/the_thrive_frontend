@@ -17,7 +17,7 @@ export const GET = async () => {
     return Response.json(ErrorResponse({}));
   }
 
-  await deleteSessionByUserId(session.user.id);
+  await deleteSessionByUserId(session.user.id, session.user.agent);
 
   cookies().delete('authjs.session-token');
 
