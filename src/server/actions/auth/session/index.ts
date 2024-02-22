@@ -46,7 +46,7 @@ export const generateSessionToken = (user: UserType) => {
   return sessionToken;
 };
 
-export const upsertSession = async (user: UserType) => {
+export const upsertSession = async (user: UserType, userAgent: string) => {
   try {
     const { id } = user;
 
@@ -57,9 +57,15 @@ export const upsertSession = async (user: UserType) => {
     const expires = addSeconds(new Date(), SESSION_UPDATE_AGE);
 
     const session = await db.session.upsert({
-      where: { userId: id },
+      where: { userId_userAgent: { userId: id, userAgent } },
       update: { id: sessionId, expires, sessionToken: token },
-      create: { id: sessionId, expires, sessionToken: token, userId: id },
+      create: {
+        id: sessionId,
+        expires,
+        sessionToken: token,
+        userId: id,
+        userAgent,
+      },
     });
 
     return session;
@@ -68,7 +74,10 @@ export const upsertSession = async (user: UserType) => {
   }
 };
 
-export const updateSessionByUserId = async (userId: string) => {
+export const updateSessionByUserId = async (
+  userId: string,
+  userAgent: string,
+) => {
   try {
     const user = await getUserById(userId);
 
@@ -76,7 +85,7 @@ export const updateSessionByUserId = async (userId: string) => {
       return null;
     }
 
-    const session = await upsertSession(user);
+    const session = await upsertSession(user, userAgent);
 
     return session;
   } catch (error) {
@@ -84,11 +93,11 @@ export const updateSessionByUserId = async (userId: string) => {
   }
 };
 
-export const getSessionByUserId = async (userId: string) => {
+export const getSessionByUserId = async (userId: string, userAgent: string) => {
   try {
     const session = await db.session.findUnique({
       where: {
-        userId,
+        userId_userAgent: { userId, userAgent },
       },
     });
 
@@ -112,12 +121,13 @@ export const getSessionById = async (id: string) => {
   }
 };
 
-export const deleteSessionByUserId = async (userId: string) => {
+export const deleteSessionByUserId = async (
+  userId: string,
+  userAgent: string,
+) => {
   try {
     const session = await db.session.delete({
-      where: {
-        userId,
-      },
+      where: { userId_userAgent: { userId, userAgent } },
     });
 
     return session;
