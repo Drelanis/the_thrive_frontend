@@ -16,6 +16,14 @@ enum UserRole {
   COMPANY
 }
 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
   id                    String                 @id @default(cuid())
   name                  String?
@@ -26,6 +34,7 @@ model User {
   password              String?
   image                 String?
   accounts              Account[]
+  sessions              Session[]
   role                  UserRole               @default(USER)
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?

@@ -2,6 +2,14 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
+Table Session {
+  id String [pk]
+  sessionToken String [unique, not null]
+  userId String [unique, not null]
+  expires DateTime [not null]
+  user User [not null]
+}
+
 Table User {
   id String [pk]
   name String
@@ -12,6 +20,7 @@ Table User {
   password String
   image String
   accounts Account [not null]
+  sessions Session [not null]
   role UserRole [not null, default: 'USER']
   isTwoFactorEnabled Boolean [not null, default: false]
   twoFactorConfirmation TwoFactorConfirmation
@@ -81,6 +90,8 @@ Enum UserRole {
   USER
   COMPANY
 }
+
+Ref: Session.userId > User.id [delete: Cascade]
 
 Ref: Account.userId > User.id [delete: Cascade]
 
