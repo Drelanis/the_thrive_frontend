@@ -1,10 +1,17 @@
-import { Providers, UserRoles } from '@configs';
+import { Providers, UserRoles, UserType } from '@configs';
+import {
+  getSessionById,
+  getSessionByUserId,
+  updateSessionByUserId,
+  upsertSession,
+} from '@server/actions/auth/session';
 import { getTwoFactorConfirmationByUserId } from '@server/actions/auth/twoFactorToken';
 import {
   getUserById,
   updateUserEmailVerifiedById,
   updateUserImageById,
 } from '@server/actions/user';
+import jwt from 'jsonwebtoken';
 
 import { CallbacksType } from './types';
 
@@ -18,6 +25,10 @@ export const callbacks: CallbacksType = {
 
     const existingUser = await getUserById(id);
 
+    if (!existingUser) {
+      return false;
+    }
+
     if (account?.type !== Providers.CREDENTIALS) {
       if (!existingUser?.emailVerified) {
         await updateUserEmailVerifiedById(id);
@@ -26,6 +37,8 @@ export const callbacks: CallbacksType = {
       if (!existingUser?.image && profile?.picture) {
         await updateUserImageById(id, profile?.picture as string);
       }
+
+      await upsertSession(existingUser);
 
       return true;
     }
@@ -46,33 +59,62 @@ export const callbacks: CallbacksType = {
 
     return true;
   },
-  session({ session, token }) {
+  async session({ session, token }) {
     const { user } = session;
 
     if (token && user) {
-      const { sub: id, role } = token;
+      const { sessionId } = token;
 
-      user.id = id;
-      user.role = role as UserRoles;
-      user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-      user.emailVerified = token.emailVerified as Date;
+      if (!sessionId) {
+        return session;
+      }
+
+      let userSession = await getSessionById(sessionId);
+
+      if (!userSession) {
+        return session;
+      }
+
+      if (new Date(userSession.expires) < new Date()) {
+        const updatedSession = await updateSessionByUserId(userSession.userId);
+
+        userSession = updatedSession!;
+      }
+
+      const payload = jwt.verify(
+        userSession?.sessionToken,
+        process.env.AUTH_SECRET!,
+      ) as UserType;
+
+      user.id = payload.id;
+      user.role = payload.role as UserRoles;
+      user.isTwoFactorEnabled = payload.isTwoFactorEnabled;
+      user.emailVerified = payload.emailVerified;
+      user.image = payload.image;
+      user.name = payload.name;
+      user.firstName = payload.firstName;
+      user.lastName = payload.lastName;
     }
 
     return session;
   },
-  async jwt({ token }) {
+  async jwt(params) {
+    const { token } = params;
+
     const { sub } = token;
 
-    const existingUser = await getUserById(sub || '');
-
-    if (!existingUser) {
+    if (!sub) {
       return token;
     }
 
-    token.emailVerified = existingUser.emailVerified;
-    token.role = existingUser.role;
-    token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
+    const existingUser = await getUserById(sub);
 
-    return token;
+    const session = await getSessionByUserId(sub);
+
+    if (!existingUser || !session) {
+      return token;
+    }
+
+    return { sessionId: session.id };
   },
 };
