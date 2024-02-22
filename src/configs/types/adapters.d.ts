@@ -2,6 +2,7 @@ import { UserRoles } from '@configs';
 import { type DefaultSession } from 'next-auth';
 
 export type ExtendedUser = DefaultSession['user'] & {
+  agent: string;
   emailVerified: Date | null;
   firstName: string | null;
   isTwoFactorEnabled: boolean;
