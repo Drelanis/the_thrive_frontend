@@ -1,4 +1,4 @@
-import { auth, NASignOut } from '@server';
+import { auth, NASignOut, signOut } from '@server';
 
 const Dashboard = async () => {
   const session = await auth();
@@ -9,6 +9,10 @@ const Dashboard = async () => {
       <form
         action={async () => {
           'use server';
+
+          if (session && session.user.id) {
+            await signOut(session.user.id);
+          }
 
           await NASignOut();
         }}
