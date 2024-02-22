@@ -2,6 +2,7 @@ words:
   - authjs
   - darkred
   - hookform
+  - nocheck
   - signin
   - signup
   - toastify
