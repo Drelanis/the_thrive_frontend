@@ -1,5 +1,10 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { Routes, SignUpDto } from '@configs';
+import {
+  Routes,
+  SESSION_EXPIRATION,
+  SESSION_UPDATE_AGE,
+  SignUpDto,
+} from '@configs';
 import { db } from '@lib';
 import type { NextAuthConfig } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
@@ -12,6 +17,9 @@ export default {
   adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',
+    // * session token expiration time: 24 hours
+    maxAge: SESSION_EXPIRATION,
+    updateAge: SESSION_UPDATE_AGE,
   },
   pages: {
     signIn: Routes.SING_IN,
