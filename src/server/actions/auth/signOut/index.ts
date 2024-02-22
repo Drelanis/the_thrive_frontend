@@ -3,9 +3,9 @@ import { ErrorResponse } from '@server/utils';
 
 import { deleteSessionByUserId } from '../session';
 
-export const signOut = async (userId: string) => {
+export const signOut = async (userId: string, agent: string) => {
   try {
-    await deleteSessionByUserId(userId);
+    await deleteSessionByUserId(userId, agent);
 
     await NASignOut();
   } catch (error) {
