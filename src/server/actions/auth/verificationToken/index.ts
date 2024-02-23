@@ -1,6 +1,10 @@
 'use server';
 
-import { EMAIL_VERIFICATION_TOKEN_EXPIRES } from '@configs/constants';
+import {
+  EMAIL_VERIFICATION_TOKEN_EXPIRES,
+  ErrorHints,
+  MessageHints,
+} from '@configs/constants';
 import { db, sendVerificationEmail } from '@lib';
 import {
   getUserByEmail,
@@ -35,7 +39,7 @@ export const emailVerify = async (token: string) => {
     const existingToken = await getVerificationTokenByToken(token);
 
     if (!existingToken) {
-      throw new Error('Something went wrong!');
+      throw new Error(ErrorHints.COMMON_ERROR);
     }
 
     checkTokenExpiration(existingToken.expires);
@@ -44,7 +48,7 @@ export const emailVerify = async (token: string) => {
 
     await deleteVerificationTokenById(existingToken.id);
 
-    return SuccessResponse({ message: 'Email verified!' });
+    return SuccessResponse({ message: MessageHints.EMAIL_VERIFIED });
   } catch (error) {
     return ErrorResponse({ error });
   }
@@ -61,7 +65,7 @@ export const checkEmailVerification = async (email: string) => {
 
   await sendVerificationEmail(email, verificationToken?.token || '');
 
-  throw new Error('Email not verified. Please confirm your email address.');
+  throw new Error(MessageHints.EMAIL_NOT_VERIFIED);
 };
 
 export const repeatMailVerification = async (token: string) => {
@@ -71,7 +75,7 @@ export const repeatMailVerification = async (token: string) => {
     if (!verificationToken) {
       return SuccessResponse({
         extraData: { isRedirect: true },
-        message: 'Repeat the process of logging into the account',
+        message: MessageHints.REPEAT_MAIL_VERIFICATION,
       });
     }
 
@@ -85,9 +89,9 @@ export const repeatMailVerification = async (token: string) => {
 
     const updatedToken = await upsertVerificationToken(email);
 
-    await sendVerificationEmail(email, updatedToken?.token || '');
+    await sendVerificationEmail(email, updatedToken?.token);
 
-    return SuccessResponse({ message: 'The email sent!' });
+    return SuccessResponse({ message: MessageHints.EMAIL_SENT });
   } catch (error) {
     return ErrorResponse({ error });
   }

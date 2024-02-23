@@ -18,6 +18,10 @@ export enum ErrorHints {
 
 export enum MessageHints {
   RESET_EMAIL = 'Reset email sent!',
+  EMAIL_SENT = 'The email sent!',
   CONFIRM_TWO_FACTOR = 'Confirm two-factor authentication!',
   PASSWORD_UPDATED = 'Password updated!',
+  EMAIL_VERIFIED = 'Email verified!',
+  EMAIL_NOT_VERIFIED = 'Email not verified. Please confirm your email address.',
+  REPEAT_MAIL_VERIFICATION = 'Repeat the process of logging into the account',
 }
