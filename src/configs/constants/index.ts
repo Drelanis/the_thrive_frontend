@@ -1,4 +1,4 @@
 export * from './routes';
-export * from './validationHints';
+export * from './hints';
 export * from './common';
 export * from './errors';
