@@ -11,4 +11,9 @@ export enum ErrorHints {
   BUSY_EMAIL = 'A company with this email address has already been created',
   EMAIL_NOT_EXIST = 'Email does not exist!',
   PASSWORD_MATCH = 'The old and new passwords must not be the same!',
+  EMAIL_NOT_FOUND = 'Email not found!',
+}
+
+export enum MessageHints {
+  RESET_EMAIL = 'Reset email sent!',
 }
