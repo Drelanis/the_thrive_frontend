@@ -1,6 +1,6 @@
 'use server';
 
-import { Providers, SigninDto } from '@configs';
+import { ErrorHints, Providers, SigninDto } from '@configs';
 import { signInValidationSchema } from '@modules/stores';
 import { getUserByEmail } from '@server/actions/user';
 import { NASignIn } from '@server/nextAuth/auth';
@@ -19,7 +19,7 @@ export const signIn = async (values: SigninDto) => {
     const user = await getUserByEmail(email);
 
     if (!user) {
-      throw new Error('Email does not exist!');
+      throw new Error(ErrorHints.EMAIL_NOT_EXIST);
     }
 
     await checkEmailVerification(email);

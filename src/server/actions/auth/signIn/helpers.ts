@@ -1,4 +1,5 @@
 import {
+  sendTwoFactor,
   twoFactorCodeVerification,
   twoFactorDataVerification,
 } from '@server/actions/auth/twoFactorToken';
@@ -9,14 +10,17 @@ export const handleTwoFactorAuth = async (
   email: string | null,
   twoFactorCode?: string,
 ) => {
-  if (!email) {
+  if (!email || !isTwoFactorEnabled) {
     return;
   }
 
-  if (isTwoFactorEnabled && !twoFactorCode) {
-    const response = await twoFactorDataVerification(userId, email);
+  if (!twoFactorCode) {
+    const isTwoFactorConfirmationExpired =
+      await twoFactorDataVerification(userId);
 
-    if (response) {
+    if (isTwoFactorConfirmationExpired) {
+      const response = await sendTwoFactor(email);
+
       return response;
     }
   }
