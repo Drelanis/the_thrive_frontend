@@ -25,7 +25,7 @@ export const ErrorResponse = (params: Params) => {
     return {
       isError: true,
       message: 'Something went wrong',
-      cause: error.message,
+      cause: error.name,
       ...extraData,
     };
   }
