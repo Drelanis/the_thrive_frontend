@@ -1,6 +1,6 @@
 'use server';
 
-import { ResetPasswordDto } from '@configs';
+import { ErrorHints, MessageHints, ResetPasswordDto } from '@configs';
 import { sendPasswordResetEmail } from '@lib';
 import { resetPasswordValidationSchema } from '@modules/stores';
 import { ErrorResponse, SuccessResponse } from '@server/utils';
@@ -17,7 +17,7 @@ export const sendEmailForResetPassword = async (values: ResetPasswordDto) => {
     const existingUser = await getUserByEmail(email);
 
     if (!existingUser) {
-      throw new Error('Email not found!');
+      throw new Error(ErrorHints.EMAIL_NOT_FOUND);
     }
 
     const passwordResetToken = await upsertResetPasswordToken(email);
@@ -29,7 +29,7 @@ export const sendEmailForResetPassword = async (values: ResetPasswordDto) => {
       );
     }
 
-    return SuccessResponse({ message: 'Reset email sent!' });
+    return SuccessResponse({ message: MessageHints.RESET_EMAIL });
   } catch (error: unknown) {
     return ErrorResponse({ error });
   }
