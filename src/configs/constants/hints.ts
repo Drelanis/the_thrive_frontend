@@ -19,4 +19,5 @@ export enum ErrorHints {
 export enum MessageHints {
   RESET_EMAIL = 'Reset email sent!',
   CONFIRM_TWO_FACTOR = 'Confirm two-factor authentication!',
+  PASSWORD_UPDATED = 'Password updated!',
 }
