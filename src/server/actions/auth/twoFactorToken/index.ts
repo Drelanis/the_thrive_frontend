@@ -65,7 +65,7 @@ export const sendTwoFactor = async (email: string) => {
   await sendTwoFactorTokenEmail(twoFactorToken.email, twoFactorToken.token);
 
   return SuccessResponse({
-    message: MessageHints.CONFIRM_TWO_FACTOR,
+    message: MessageHints.CONFIRM_TWO_FACTOR.toString(),
     extraData: { isTwoFactor: true },
   });
 };
