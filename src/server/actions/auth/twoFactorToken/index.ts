@@ -1,4 +1,4 @@
-import { TWO_FACTOR_TOKEN_EXPIRES } from '@configs';
+import { ErrorHints, MessageHints, TWO_FACTOR_TOKEN_EXPIRES } from '@configs';
 import { db, sendTwoFactorTokenEmail } from '@lib';
 import { SuccessResponse } from '@server/utils';
 import crypto from 'crypto';
@@ -65,32 +65,21 @@ export const sendTwoFactor = async (email: string) => {
   await sendTwoFactorTokenEmail(twoFactorToken.email, twoFactorToken.token);
 
   return SuccessResponse({
-    message: 'Confirm two-factor authentication!',
+    message: MessageHints.CONFIRM_TWO_FACTOR,
     extraData: { isTwoFactor: true },
   });
 };
 
-export const twoFactorDataVerification = async (
-  userId: string,
-  email: string,
-) => {
+export const twoFactorDataVerification = async (userId: string) => {
   const tokenConfirmation = await getTwoFactorConfirmationByUserId(userId);
 
   if (!tokenConfirmation) {
-    throw new Error('Something went wrong');
+    throw new Error(ErrorHints.COMMON_ERROR);
   }
 
-  let expired = false;
+  const isTokenExpired = new Date() > tokenConfirmation?.expires;
 
-  if (tokenConfirmation?.expires) {
-    expired = new Date() > tokenConfirmation?.expires;
-  }
-
-  if (expired) {
-    const response = await sendTwoFactor(email);
-
-    return response;
-  }
+  return isTokenExpired;
 };
 
 export const twoFactorCodeVerification = async (
@@ -102,7 +91,7 @@ export const twoFactorCodeVerification = async (
   const isCodeMatch = twoFactorToken!.token === twoFactorCode;
 
   if (!isCodeMatch) {
-    throw new Error('Invalid code!');
+    throw new Error(ErrorHints.TWO_FACTOR_WRONG);
   }
 
   await deleteTwoFactorToken(twoFactorToken!.id);
