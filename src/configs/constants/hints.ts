@@ -12,8 +12,11 @@ export enum ErrorHints {
   EMAIL_NOT_EXIST = 'Email does not exist!',
   PASSWORD_MATCH = 'The old and new passwords must not be the same!',
   EMAIL_NOT_FOUND = 'Email not found!',
+  COMMON_ERROR = 'Something went wrong!',
+  TWO_FACTOR_WRONG = 'Invalid code!',
 }
 
 export enum MessageHints {
   RESET_EMAIL = 'Reset email sent!',
+  CONFIRM_TWO_FACTOR = 'Confirm two-factor authentication!',
 }
