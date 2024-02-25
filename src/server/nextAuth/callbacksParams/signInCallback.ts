@@ -22,30 +22,32 @@ export const signInCallback = async (
     return false;
   }
 
-  const existingUser = await getUserById(id);
+  let existingUser = await getUserById(id);
 
-  if (!existingUser) {
-    return false;
+  if (account?.type !== Providers.CREDENTIALS && !existingUser) {
+    return true;
   }
 
-  if (account?.type === Providers.CREDENTIALS) {
+  if (account?.type === Providers.CREDENTIALS && existingUser) {
     await upsertSession(existingUser, user.agent);
   }
 
   if (account?.type !== Providers.CREDENTIALS) {
     if (!existingUser?.emailVerified) {
-      await updateUserEmailVerifiedById(id);
+      existingUser = await updateUserEmailVerifiedById(id);
     }
 
     if (!existingUser?.image && profile?.picture) {
-      await updateUserImageById(id, profile?.picture as string);
+      existingUser = await updateUserImageById(id, profile?.picture as string);
     }
 
-    if (request) {
-      const linkedUserAgent = userAgent(request);
-
-      await upsertSession(existingUser, linkedUserAgent.ua);
+    if (!request || !existingUser) {
+      return false;
     }
+
+    const linkedUserAgent = userAgent(request);
+
+    await upsertSession(existingUser, linkedUserAgent.ua);
 
     return true;
   }
