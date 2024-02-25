@@ -6,7 +6,7 @@ export const POST = async (request: Request) => {
 
   const response = await signIn(dto);
 
-  if (response?.isError) {
+  if (response?.isError || response?.isTwoFactor) {
     return Response.json({ ...response });
   }
 
