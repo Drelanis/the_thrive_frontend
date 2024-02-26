@@ -24,15 +24,15 @@ export const signIn = async (values: SigninDto) => {
 
     await checkEmailVerification(email);
 
-    const twoFactoResponse = await handleTwoFactorAuth(
+    const twoFactorResponse = await handleTwoFactorAuth(
       user.id,
       user?.isTwoFactorEnabled,
       user.email,
       twoFactorCode,
     );
 
-    if (twoFactoResponse) {
-      return twoFactoResponse;
+    if (twoFactorResponse) {
+      return twoFactorResponse;
     }
 
     await NASignIn(Providers.CREDENTIALS, {
