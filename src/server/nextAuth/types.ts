@@ -10,7 +10,7 @@ export type SessionParams = {
 };
 
 export type JWTParams = {
-  token: JWT & { agent: string };
+  token: JWT & { agent: string; sessionId?: string };
   user: (User | AdapterUser) & { agent: string };
 };
 

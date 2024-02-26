@@ -1,7 +1,4 @@
-import {
-  getSessionByUserId,
-  upsertSession,
-} from '@server/actions/auth/session';
+import { getSessionById, upsertSession } from '@server/actions/auth/session';
 import { getUserById } from '@server/actions/user';
 import { userAgent } from 'next/server';
 
@@ -10,9 +7,21 @@ import { JWTParams } from '../types';
 export const jwtCallback = async (params: JWTParams, request?: Request) => {
   const { token, user } = params;
 
-  const { sub } = token;
-
+  let sub = '';
   let agent = '';
+  let session = null;
+
+  if (token && token.sub) {
+    sub = token.sub;
+  }
+
+  if (token && token.sessionId) {
+    session = await getSessionById(token.sessionId);
+
+    if (session) {
+      sub = session?.userId;
+    }
+  }
 
   if (user && user.agent) {
     agent = user.agent;
@@ -26,13 +35,11 @@ export const jwtCallback = async (params: JWTParams, request?: Request) => {
     agent = userAgent(request).ua;
   }
 
-  const existingUser = await getUserById(sub!);
-
-  let session = await getSessionByUserId(sub!, agent);
+  const existingUser = await getUserById(sub);
 
   if (!session) {
     session = await upsertSession(existingUser!, agent);
   }
 
-  return { sessionId: session.id, agent, sub: existingUser!.id };
+  return { sessionId: session.id, agent };
 };
