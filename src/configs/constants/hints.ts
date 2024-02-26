@@ -14,6 +14,7 @@ export enum ErrorHints {
   EMAIL_NOT_FOUND = 'Email not found!',
   COMMON_ERROR = 'Something went wrong!',
   TWO_FACTOR_WRONG = 'Invalid code!',
+  INVALID_CREDENTIALS = 'Invalid email or password!',
 }
 
 export enum MessageHints {

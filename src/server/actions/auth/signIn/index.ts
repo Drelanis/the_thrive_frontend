@@ -19,7 +19,7 @@ export const signIn = async (values: SigninDto) => {
     const user = await getUserByEmail(email);
 
     if (!user) {
-      throw new Error(ErrorHints.EMAIL_NOT_EXIST);
+      throw new Error(ErrorHints.INVALID_CREDENTIALS);
     }
 
     await checkEmailVerification(email);

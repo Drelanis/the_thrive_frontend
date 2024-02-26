@@ -20,7 +20,7 @@ export const useSignIn = (params: Params) => {
     startTransition(async () => {
       const data = await signIn(getValues());
 
-      if (data && 'isTwoFactor' in data) {
+      if (data && data.isTwoFactor) {
         toast.info(data?.message);
         setIsTwoFactor(true);
 

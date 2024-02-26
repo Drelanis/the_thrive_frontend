@@ -52,6 +52,10 @@ export default {
 
         const user = await NAAuthorize(credentials as SignUpDto | null);
 
+        if (!user) {
+          return null;
+        }
+
         return { agent, ...user };
       },
     }),

@@ -1,3 +1,4 @@
+import { ErrorHints } from '@configs';
 import { AuthError } from 'next-auth';
 
 import { ErrorResponse } from './ErrorResponse';
@@ -9,13 +10,13 @@ export const SignInErrorResponse = (error: unknown) => {
         return {
           isError: true,
           isTwoFactor: false,
-          message: 'Invalid email or password!',
+          message: ErrorHints.INVALID_CREDENTIALS,
         };
       default:
         return {
           isError: true,
           isTwoFactor: false,
-          message: 'Something went wrong!',
+          message: ErrorHints.COMMON_ERROR,
         };
     }
   }
