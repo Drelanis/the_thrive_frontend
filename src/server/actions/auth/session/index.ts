@@ -1,6 +1,7 @@
 'use server';
 
 import {
+  ErrorHints,
   SESSION_EXPIRATION_HOURS,
   SESSION_UPDATE_AGE,
   UserType,
@@ -70,7 +71,7 @@ export const upsertSession = async (user: UserType, userAgent: string) => {
 
     return session;
   } catch (error) {
-    throw new Error('Something went wrong!');
+    throw new Error(ErrorHints.COMMON_ERROR);
   }
 };
 
@@ -132,6 +133,6 @@ export const deleteSessionByUserId = async (
 
     return session;
   } catch (error) {
-    throw new Error('Something went wrong');
+    throw new Error(ErrorHints.COMMON_ERROR);
   }
 };

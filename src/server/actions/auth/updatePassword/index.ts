@@ -1,6 +1,6 @@
 'use server';
 
-import { NewPasswordDto } from '@configs';
+import { ErrorHints, MessageHints, NewPasswordDto } from '@configs';
 import { newPasswordValidationSchema } from '@modules/stores';
 import { updateUserPassword } from '@server/actions/user';
 import { ErrorResponse, SuccessResponse } from '@server/utils';
@@ -13,7 +13,7 @@ export const updatePassword = async (
 ) => {
   try {
     if (!token) {
-      throw new Error('Something went wrong!');
+      throw new Error(ErrorHints.COMMON_ERROR);
     }
 
     await newPasswordValidationSchema.validate(values);
@@ -31,7 +31,7 @@ export const updatePassword = async (
       newPassword,
     );
 
-    return SuccessResponse({ message: 'Password updated!' });
+    return SuccessResponse({ message: MessageHints.PASSWORD_UPDATED });
   } catch (error) {
     return ErrorResponse({ error });
   }

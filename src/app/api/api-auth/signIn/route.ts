@@ -1,28 +1,19 @@
-import { UserType } from '@configs';
-import { ErrorResponse, getUserByEmail, signIn } from '@server';
+import { SigninDto, UserType } from '@configs';
+import { getUserByEmail, signIn } from '@server';
 
-export const GET = async (request: Request) => {
-  const { searchParams } = new URL(request.url);
+export const POST = async (request: Request) => {
+  const dto = (await request.json()) as SigninDto;
 
-  const email = searchParams.get('email');
-  const userPassword = searchParams.get('password');
+  const response = await signIn(dto);
 
-  if (!email || !userPassword) {
-    const errorResponse = ErrorResponse({
-      message: 'Invalid password or email',
-    });
-
-    return Response.json(errorResponse);
-  }
-
-  const response = await signIn({ email, password: userPassword });
-
-  if (response?.isError) {
+  if (response?.isError || response?.isTwoFactor) {
     return Response.json({ ...response });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password, ...restData } = (await getUserByEmail(email)) as UserType;
+  const { password, ...restData } = (await getUserByEmail(
+    dto.email,
+  )) as UserType;
 
   return Response.json({ ...restData });
 };

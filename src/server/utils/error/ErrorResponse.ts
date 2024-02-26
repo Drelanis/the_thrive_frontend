@@ -17,6 +17,7 @@ export const ErrorResponse = (params: Params) => {
     if (error.name === DEFAULT_ERROR) {
       return {
         isError: true,
+        isTwoFactor: false,
         message: error.message,
         ...extraData,
       };
@@ -25,7 +26,8 @@ export const ErrorResponse = (params: Params) => {
     return {
       isError: true,
       message: 'Something went wrong',
-      cause: error.message,
+      isTwoFactor: false,
+      cause: error.name,
       ...extraData,
     };
   }
@@ -33,6 +35,7 @@ export const ErrorResponse = (params: Params) => {
   return {
     isError: true,
     message,
+    isTwoFactor: false,
     ...extraData,
   };
 };

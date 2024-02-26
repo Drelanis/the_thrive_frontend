@@ -8,11 +8,13 @@ export const SignInErrorResponse = (error: unknown) => {
       case 'CredentialsSignin':
         return {
           isError: true,
+          isTwoFactor: false,
           message: 'Invalid email or password!',
         };
       default:
         return {
           isError: true,
+          isTwoFactor: false,
           message: 'Something went wrong!',
         };
     }

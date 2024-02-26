@@ -7,5 +7,5 @@ export const GET = async () => {
     return Response.json(ErrorResponse({}));
   }
 
-  return Response.json({ ...session });
+  return Response.json(session);
 };

@@ -1,4 +1,4 @@
-import { SignUpDto, UserType } from '@configs';
+import { ErrorHints, SignUpDto, UserType } from '@configs';
 import { db } from '@lib';
 import * as bcrypt from 'bcryptjs';
 
@@ -40,9 +40,7 @@ export const createUser = async (dto: Omit<SignUpDto, 'repeatPassword'>) => {
   const existingUser = await getUserByEmail(email);
 
   if (existingUser) {
-    throw new Error(
-      'A company with this email address has already been created',
-    );
+    throw new Error(ErrorHints.BUSY_EMAIL);
   }
 
   const hashedPassword = await bcrypt.hash(
@@ -68,7 +66,7 @@ export const updateUserByEmailVerified = async (email: string) => {
     const existingUser = await getUserByEmail(email);
 
     if (!existingUser) {
-      throw new Error('Email does not exist!');
+      throw new Error(ErrorHints.EMAIL_NOT_EXIST);
     }
 
     await db.user.update({
@@ -92,7 +90,7 @@ export const updateUserPassword = async (
   const isPasswordsMatch = await bcrypt.compare(newPassword, userPassword);
 
   if (isPasswordsMatch) {
-    throw new Error('The old and new passwords must not be the same!');
+    throw new Error(ErrorHints.PASSWORD_MATCH);
   }
 
   const hashedNewPassword = await bcrypt.hash(

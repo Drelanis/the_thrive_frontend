@@ -6,9 +6,10 @@ export enum Routes {
   NEW_PASSWORD = '/auth/new-password',
   RESET_PASSWORD = '/auth/reset-password',
   DASHBOARD = '/dashboard',
-  MOBILE_SIGN_IN = '/api/api-auth/signIn',
-  MOBILE_SIGN_OUT = '/api/api-auth/signOut',
-  MOBILE_REFRESH_SESSION = '/api/api-auth/refresh',
+  API_AUTH_SIGN_IN = '/api/api-auth/signIn',
+  API_AUTH_SIGN_UP = '/api/api-auth/signUp',
+  API_AUTH_SIGN_OUT = '/api/api-auth/signOut',
+  API_AUTH_REFRESH_SESSION = '/api/api-auth/refresh',
 }
 
 /**
@@ -31,9 +32,10 @@ export const authRoutes: string[] = [
 export const publicRoutes: string[] = [
   Routes.HOME,
   Routes.EMAIL_VERIFY,
-  Routes.MOBILE_SIGN_IN,
-  Routes.MOBILE_SIGN_OUT,
-  Routes.MOBILE_REFRESH_SESSION,
+  Routes.API_AUTH_SIGN_IN,
+  Routes.API_AUTH_SIGN_OUT,
+  Routes.API_AUTH_REFRESH_SESSION,
+  Routes.API_AUTH_SIGN_UP,
 ];
 
 /**
