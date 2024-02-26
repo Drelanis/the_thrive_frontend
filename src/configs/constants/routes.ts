@@ -10,6 +10,7 @@ export enum Routes {
   API_AUTH_SIGN_UP = '/api/api-auth/signUp',
   API_AUTH_SIGN_OUT = '/api/api-auth/signOut',
   API_AUTH_REFRESH_SESSION = '/api/api-auth/refresh',
+  API_AUTH_RESET_PASSWORD = '/api/api-auth/resetPassword',
 }
 
 /**
@@ -22,6 +23,7 @@ export const authRoutes: string[] = [
   Routes.SING_UP,
   Routes.RESET_PASSWORD,
   Routes.NEW_PASSWORD,
+  Routes.API_AUTH_RESET_PASSWORD,
 ];
 
 /**
