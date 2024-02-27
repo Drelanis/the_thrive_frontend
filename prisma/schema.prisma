@@ -41,6 +41,7 @@ model User {
   role                  UserRole               @default(USER)
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+  companies             Company[] 
 }
 
 model Account {
@@ -97,4 +98,37 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
+}
+
+model Company {
+  id String   @id @default(cuid()) @unique
+  createBy   User   @relation(fields: [createById], references: [id], onDelete: Cascade)
+  createById  String @unique
+  name String
+  email String
+  addressId String
+  numberOfEmployee Int
+  direction Direction[]
+  officeAddress OfficeAddress[]
+}
+
+model Direction {
+  id String   @id @default(cuid()) @unique
+  name String
+  description String
+  direction Company[]
+}
+
+model OfficeAddress {
+  id String   @id @default(cuid()) @unique
+  country String
+
+  companyId String
+  company   Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  state String
+  region String
+  city String
+  steet String
+  zipCode String
 }

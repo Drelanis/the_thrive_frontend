@@ -29,6 +29,7 @@ Table User {
   role UserRole [not null, default: 'USER']
   isTwoFactorEnabled Boolean [not null, default: false]
   twoFactorConfirmation TwoFactorConfirmation
+  companies Company [not null]
 }
 
 Table Account {
@@ -91,6 +92,42 @@ Table TwoFactorConfirmation {
   user User [not null]
 }
 
+Table Company {
+  id String [pk]
+  createBy User [not null]
+  createById String [unique, not null]
+  name String [not null]
+  email String [not null]
+  addressId String [not null]
+  numberOfEmployee Int [not null]
+  direction Direction [not null]
+  officeAddress OfficeAddress [not null]
+}
+
+Table Direction {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  direction Company [not null]
+}
+
+Table OfficeAddress {
+  id String [pk]
+  country String [not null]
+  companyId String [not null]
+  company Company [not null]
+  state String [not null]
+  region String [not null]
+  city String [not null]
+  steet String [not null]
+  zipCode String [not null]
+}
+
+Table CompanyToDirection {
+  directionId String [ref: > Direction.id]
+  directionId String [ref: > Company.id]
+}
+
 Enum UserRole {
   USER
   COMPANY
@@ -101,3 +138,7 @@ Ref: Session.userId > User.id [delete: Cascade]
 Ref: Account.userId > User.id [delete: Cascade]
 
 Ref: TwoFactorConfirmation.userId - User.id [delete: Cascade]
+
+Ref: Company.createById > User.id [delete: Cascade]
+
+Ref: OfficeAddress.companyId > Company.id [delete: Cascade]
