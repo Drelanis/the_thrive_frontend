@@ -98,7 +98,6 @@ Table Company {
   createById String [unique, not null]
   name String [not null]
   email String [not null]
-  addressId String [not null]
   numberOfEmployee Int [not null]
   direction Direction [not null]
   officeAddress OfficeAddress [not null]
@@ -108,7 +107,7 @@ Table Direction {
   id String [pk]
   name String [not null]
   description String [not null]
-  direction Company [not null]
+  company Company [not null]
 }
 
 Table OfficeAddress {
@@ -119,13 +118,13 @@ Table OfficeAddress {
   state String [not null]
   region String [not null]
   city String [not null]
-  steet String [not null]
+  street String [not null]
   zipCode String [not null]
 }
 
 Table CompanyToDirection {
   directionId String [ref: > Direction.id]
-  directionId String [ref: > Company.id]
+  companyId String [ref: > Company.id]
 }
 
 Enum UserRole {

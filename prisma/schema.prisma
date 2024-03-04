@@ -106,7 +106,6 @@ model Company {
   createById  String @unique
   name String
   email String
-  addressId String
   numberOfEmployee Int
   direction Direction[]
   officeAddress OfficeAddress[]
@@ -116,7 +115,7 @@ model Direction {
   id String   @id @default(cuid()) @unique
   name String
   description String
-  direction Company[]
+  company Company[]
 }
 
 model OfficeAddress {
@@ -129,6 +128,6 @@ model OfficeAddress {
   state String
   region String
   city String
-  steet String
+  street String
   zipCode String
 }
