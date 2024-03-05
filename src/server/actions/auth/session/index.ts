@@ -59,7 +59,7 @@ export const upsertSession = async (user: UserType, userAgent: string) => {
 
     const session = await db.session.upsert({
       where: { userId_userAgent: { userId: id, userAgent } },
-      update: { id: sessionId, expires, sessionToken: token },
+      update: { expires, sessionToken: token },
       create: {
         id: sessionId,
         expires,
