@@ -1,4 +1,4 @@
-import { CompanyDtoType } from '@configs';
+import { CompanyDtoType, MessageHints } from '@configs';
 import { createCompany, ErrorResponse } from '@server';
 
 export const POST = async (request: Request) => {
@@ -7,7 +7,10 @@ export const POST = async (request: Request) => {
 
     const company = await createCompany(dto);
 
-    return Response.json(company);
+    return Response.json({
+      message: MessageHints.THE_COMPANY_CREATED,
+      ...company,
+    });
   } catch (error) {
     return Response.json(ErrorResponse({ error }));
   }

@@ -25,4 +25,5 @@ export enum MessageHints {
   EMAIL_VERIFIED = 'Email verified!',
   EMAIL_NOT_VERIFIED = 'Email not verified. Please confirm your email address.',
   REPEAT_MAIL_VERIFICATION = 'Repeat the process of logging into the account',
+  THE_COMPANY_CREATED = 'The company was successfully created',
 }
