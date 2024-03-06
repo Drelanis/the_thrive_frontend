@@ -1,3 +1,5 @@
+import { Countries } from '../constants';
+
 export type SigninDto = {
   email: string;
   password: string;
@@ -19,4 +21,21 @@ export type SignUpDto = {
   lastName: string;
   password: string;
   repeatPassword: string;
+};
+
+export type OfficeAddressDtoType = {
+  city: string;
+  country: Countries | '';
+  region: string;
+  state: string;
+  street: string;
+  zipCode: string;
+};
+
+export type CompanyDtoType = {
+  address: OfficeAddressDtoType[];
+  directions: string[];
+  email: string;
+  name: string;
+  numberOfEmployee: string;
 };

@@ -19,3 +19,8 @@ export enum UserRoles {
   USER = 'USER',
   COMPANY = 'COMPANY',
 }
+
+export enum Countries {
+  USA = 'USA',
+  Ukraine = 'Ukraine',
+}
